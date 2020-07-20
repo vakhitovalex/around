@@ -15,12 +15,19 @@
   width: 100%;
 }
 
+.header {
+  border-bottom: 1px solid rgba(84, 84, 84, 0.7);
+}
+
 .header__image {
   padding: 45px 0 40px;
 }
 
-.header {
-  border-bottom: 1px solid #545454;
-  opacity: .7;
-}
 
+
+/* .header__line {
+  align-self: center;
+  opacity: .7;
+  color: #545454;
+}
+ */
