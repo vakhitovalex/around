@@ -43,11 +43,14 @@
   display: flex;
 }
 
+.profile__head {
+  display: flex;
+}
 
 .profile__info {
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: space-evenly;
 }
 
 .profile__name {
@@ -64,8 +67,8 @@
 }
 
 .profile__edit {
-  display: flex;
-  align-self: center;
+  /* display: flex;
+  align-self: center; */
   background-color: #000;
   padding: 7px;
   font-size: 0;
