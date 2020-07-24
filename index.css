@@ -176,6 +176,7 @@
   .profile__edit {
     height: 18px;
     width: 18px;
+  }
 }
 
 @media screen and (max-width: 656px) {
@@ -187,33 +188,36 @@
     flex-direction: column;
     align-items: center;
     margin: 40px 0 50px;
-
   }
+
   .profile__form {
     flex-direction: column;
     align-items: center;
-
   }
+
   .profile__picture {
     margin-right: 0;
   }
+
   .profile__about {
     align-self: center;
     margin-bottom: 36px;
   }
+
   .profile__add {
     height: 16px;
     width: 16px;
     align-self: center;
     padding: 17px calc(44vw);
   }
+
   .elements {
     flex-direction: column;
     align-items: center;
   }
+
   .footer {
     padding-top: 28px;
     padding-bottom: 36px;
   }
-
 }
