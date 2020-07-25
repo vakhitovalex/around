@@ -20,7 +20,7 @@
 
         <section class="profile">
 
-          <div class="profile__form">
+          <div class="profile__current">
             <img src="./images/profile__picture.png" alt="profile picture" class="profile__picture">
             <div class="profile__info">
               <div class="profile__head">
@@ -31,6 +31,22 @@
             </div>
           </div>
           <img src="./images/plus.png" alt="plus add sign" class="profile__add">
+
+          <div class="modal modal_open">
+
+            <div class="modal__container">
+              <button class="modal__close-button"></button>
+              <h2 class="modal__title">Edit Profile</h2>
+
+              <form action="" class="form">
+                <input type="text" class="form__name" value="Jacques Cousteau">
+                <input type="text" class="form__about" value="Explorer">
+                <button class="form__submit" type="submit">Save</button>
+              </form>
+            </div>
+
+          </div>
+
         </section>
 
         <section class="elements">
@@ -84,5 +100,6 @@
 
       </main>
     </div>
+    <script src="index.js"></script>
   </body>
 </html>
