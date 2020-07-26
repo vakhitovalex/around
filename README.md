@@ -1,6 +1,6 @@
 # Project 4: Around The U.S.
 
-[GitHub](https://vakhitovalex.github.io/web_project_4/)
+[Link to my project -> https://vakhitovalex.github.io/web_project_4/](https://vakhitovalex.github.io/web_project_4/)
 
 ### Written used pure vanilla JS
 ### Things to improve 
