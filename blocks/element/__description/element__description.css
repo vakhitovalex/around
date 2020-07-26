@@ -1,0 +1,10 @@
+.element__description {
+  background-color: #fff;
+  display: flex;
+  justify-content: space-between;
+  margin-top: -5px;
+  padding: 25px 0;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+  max-width: 282px;
+}

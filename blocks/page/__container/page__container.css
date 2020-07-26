@@ -1,0 +1,19 @@
+.page__container {
+  max-width: 882px;
+  /* min-width: 300px; */
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  width: 100%;
+}
+@media screen and (min-width: 926px) {
+  .page__container {
+    max-width: 882px
+  }
+}
+
+@media screen and (max-width: 925px) {
+  .page__container {
+    max-width: 88vw;
+  }
+}
