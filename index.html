@@ -13,79 +13,65 @@
     <div class="page__container">
       <header class="header">
         <img src="./images/vector.svg" alt="title image" class="header__image">
-        <!-- <hr class="header__line"> -->
       </header>
-
       <main class="content">
-
         <section class="profile">
-
           <div class="profile__current">
             <img src="./images/profile__picture.png" alt="profile picture" class="profile__picture">
             <div class="profile__info">
               <div class="profile__head">
-                <p class="profile__name">Jacques Cousteau</p>
+                <h1 class="profile__name">Jacques Cousteau</h1>
                 <button class="profile__edit"></button>
               </div>
               <p class="profile__about">Explorer</p>
             </div>
           </div>
-          <img src="./images/plus.png" alt="plus add sign" class="profile__add">
+          <button class="profile__add"></button>
 
-          <div class="modal">
-            <div class="modal__container">
-              <button class="modal__close-button"></button>
-              <h2 class="modal__title">Edit Profile</h2>
-              <form action="" class="form">
-                <input type="text" class="form__name" value="">
-                <input type="text" class="form__about" value="">
-                <button class="form__submit" type="submit">Save</button>
-              </form>
-            </div>
-          </div>
+
         </section>
 
         <section class="elements">
           <div class="element">
             <img src="./images/yosemite.jpg" alt="photo of Yosemite" class="element__image">
             <div class="element__description">
-              <p class="element__name">Yosemite Valley</p>
-              <img src="./images/like.svg" alt="like" class="element__like">
+              <h2 class="element__name">Yosemite Valley</h2>
+              <button class="element__like"></button>
             </div>
           </div>
           <div class="element">
             <img src="./images/tahoe.jpg" alt="Lake Tahoe" class="element__image">
             <div class="element__description">
-              <p class="element__name">Lake Tahoe</p>
-              <img src="./images/like.svg" alt="like" class="element__like">
+              <h2 class="element__name">Lake Tahoe</h2>
+              <button class="element__like"></button>
             </div>
           </div>
           <div class="element">
             <img src="./images/sequoia.jpg" alt="Sequoia National Park in CA" class="element__image">
             <div class="element__description">
-              <p class="element__name">Sequoia National Park</p>
-              <img src="./images/like.svg" alt="like" class="element__like">
+              <h2 class="element__name">Sequoia National Park</h2>
+              <button class="element__like"></button>
             </div>
           </div>
           <div class="element">
             <img src="./images/antilope.jpg" alt="Antilope Canyon" class="element__image">
             <div class="element__description">
-              <p class="element__name">Antilope Canyon</p>
-              <img src="./images/like.svg" alt="like" class="element__like">
+              <h2 class="element__name">Antilope Canyon</h2>
+              <button class="element__like"></button>
             </div>
           </div>
           <div class="element">
             <img src="./images/niagara.jpg" alt="Niagara Falls in NY" class="element__image">
             <div class="element__description">
-              <p class="element__name">Niagara Falls</p>
-              <img src="./images/like.svg" alt="like" class="element__like">
+              <h2 class="element__name">Niagara Falls</h2>
+              <button class="element__like"></button>
             </div>
           </div>
           <div class="element">
             <img src="./images/monument.jpg" alt="photo of monument valley in AZ" class="element__image">
             <div class="element__description">
-              <p class="element__name">Monument Valley</p>
-              <img src="./images/like.svg" alt="like" class="element__like">
+              <h2 class="element__name">Monument Valley</h2>
+              <button class="element__like"></button>
             </div>
           </div>
         </section>
@@ -93,6 +79,17 @@
         <footer class="footer">
           <p class="footer__text"> © 2020 Around The U.S.</p>
         </footer>
+        <div class="modal">
+          <div class="modal__container">
+            <button class="modal__close-button"></button>
+            <h3 class="modal__title">Edit Profile</h3>
+            <form action="submit" class="form">
+              <input type="text" class="form__name" value="">
+              <input type="text" class="form__about" value="">
+              <button class="form__submit" type="submit">Save</button>
+            </form>
+          </div>
+        </div>
 
       </main>
     </div>

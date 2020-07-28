@@ -2,6 +2,7 @@
   height: 22px;
   width: 22px;
   padding: 14px 64px;
+  background: url(../../../images/plus.png) no-repeat center;
   border: 1px solid #FFFFFF;
   cursor: pointer;
 }
