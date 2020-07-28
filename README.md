@@ -1,6 +1,8 @@
 # Project 4: Around The U.S.
 
-## Written used vanilla JS
+[Link to my project -> https://vakhitovalex.github.io/web_project_4/](https://vakhitovalex.github.io/web_project_4/)
 
-### Things to improve - Initial edit modal with placeholders in it;
+### Written used pure vanilla JS
+### Things to improve 
+* Initial edit modal with placeholders in it;
 
