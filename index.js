@@ -4,28 +4,18 @@ let closeModal = document.querySelector('.modal__close-button');
 let profileName = document.querySelector('.profile__name');
 let profileAbout = document.querySelector('.profile__about');
 let form = document.querySelector('.form');
-// let formName = document.querySelector('.form__name');
-// let formAbout = document.querySelector('.form__about');
+let formName = document.querySelector('.form__name');
+let formAbout = document.querySelector('.form__about');
 
-
-function initialModalLoading () {
-  let formName = document.querySelector('.form__name');
-  let formAbout = document.querySelector('.form__about');
+function controlEditModal (e) {
   formName.value = profileName.textContent;
   formAbout.value = profileAbout.textContent;
-}
-
-function controlEditModal () {
-  initialModalLoading ();
   modal.classList.toggle('modal_open');
 }
 
-function closeEditModal (e) {
+function closingModal (e) {
   e.preventDefault ();
-  let formName = document.querySelector('.form__name');
-  let formAbout = document.querySelector('.form__about');
   formName.value = profileName.textContent;
-  console.log (formName.value);
   formAbout.value = profileAbout.textContent;
   modal.classList.toggle('modal_open');
 }
@@ -33,17 +23,12 @@ function closeEditModal (e) {
 
 function formSubmit (e) {
   e.preventDefault ();
-  let formName = document.querySelector('.form__name');
-  let formAbout = document.querySelector('.form__about');
-  formName = formName.value;
-  formAbout = formAbout.value;
-  profileName.textContent = formName;
-  profileAbout.textContent = formAbout;
+  profileName.textContent = formName.value;
+  profileAbout.textContent = formAbout.value;
   modal.classList.toggle('modal_open');
 }
 
 
-
 modalEditButton.addEventListener('click', controlEditModal);
-closeModal.addEventListener('click', closeEditModal);
+closeModal.addEventListener('click', closingModal);
 form.addEventListener('submit', formSubmit);
