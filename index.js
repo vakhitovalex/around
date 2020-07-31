@@ -1,22 +1,19 @@
-let modalEditButton = document.querySelector('.profile__edit');
-let modal = document.querySelector('.modal');
-let closeModal = document.querySelector('.modal__close-button');
-let profileName = document.querySelector('.profile__name');
-let profileAbout = document.querySelector('.profile__about');
-let form = document.querySelector('.form');
-let formName = document.querySelector('.form__name');
-let formAbout = document.querySelector('.form__about');
+const modalEditButton = document.querySelector('.profile__edit');
+const modal = document.querySelector('.modal');
+const closeModal = document.querySelector('.modal__close-button');
+const profileName = document.querySelector('.profile__name');
+const profileAbout = document.querySelector('.profile__about');
+const form = document.querySelector('.form');
+const formName = document.querySelector('.form__name');
+const formAbout = document.querySelector('.form__about');
 
-function controlEditModal (e) {
+function controlEditModal () {
   formName.value = profileName.textContent;
   formAbout.value = profileAbout.textContent;
   modal.classList.toggle('modal_open');
 }
 
-function closingModal (e) {
-  e.preventDefault ();
-  formName.value = profileName.textContent;
-  formAbout.value = profileAbout.textContent;
+function closingModal () {
   modal.classList.toggle('modal_open');
 }
 

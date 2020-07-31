@@ -7,5 +7,6 @@
   .header__image {
     padding: 28px 0 32px;
     width: 126px;
+    margin-left: 27px;
   }
 }
