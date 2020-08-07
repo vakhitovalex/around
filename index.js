@@ -7,6 +7,34 @@ const form = document.querySelector('.form');
 const formName = document.querySelector('.form__name');
 const formAbout = document.querySelector('.form__about');
 
+const initialCards = [
+  {
+    name: 'Yosemite Valley',
+    link: './images/yosemite.jpg'
+  },
+  {
+    name: 'Lake Tahoe',
+    link: './images/tahoe.jpg'
+  },
+  {
+    name: 'Sequoia National Park',
+    link: './images/sequoia.jpg'
+  },
+  {
+    name: 'Antilope Canyon',
+    link: './images/antilope.jpg'
+  },
+  {
+    name: 'Niagara Falls',
+    link: './images/niagara.jpg'
+  },
+  {
+    name: 'Monument Valley',
+    link: './images/monument.jpg'
+  }
+]
+
+
 function controlEditModal () {
   formName.value = profileName.textContent;
   formAbout.value = profileAbout.textContent;
