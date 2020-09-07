@@ -3,4 +3,7 @@
   border-top-right-radius: 15px;
   width: 282px;
   height: 282px;
+  background: no-repeat center;
+  background-size: 282px 282px;
+}
 }

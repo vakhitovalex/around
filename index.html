@@ -7,7 +7,7 @@
   <meta name="keywords" content="html, css, js">
   <meta name="author" content="Alex Vakhitov">
   <title>Around the U.S.</title>
-  <link rel="stylesheet" href="./index.css">
+  <link rel="stylesheet" href="./styles/index.css">
 </head>
   <body class="page">
     <div class="page__container">
@@ -27,79 +27,57 @@
             </div>
           </div>
           <button type="button" class="profile__add"></button>
-
-
         </section>
 
-        <section class="elements">
-          <div class="element">
-            <img src="./images/yosemite.jpg" alt="photo of Yosemite" class="element__image">
-            <div class="element__description">
-              <h2 class="element__name">Yosemite Valley</h2>
-              <button type="button" class="element__like"></button>
-            </div>
-          </div>
-          <div class="element">
-            <img src="./images/tahoe.jpg" alt="Lake Tahoe" class="element__image">
-            <div class="element__description">
-              <h2 class="element__name">Lake Tahoe</h2>
-              <button type="button" class="element__like"></button>
-            </div>
-          </div>
-          <div class="element">
-            <img src="./images/sequoia.jpg" alt="Sequoia National Park in CA" class="element__image">
-            <div class="element__description">
-              <h2 class="element__name">Sequoia National Park</h2>
-              <button type="button" class="element__like"></button>
-            </div>
-          </div>
-          <div class="element">
-            <img src="./images/antilope.jpg" alt="Antilope Canyon" class="element__image">
-            <div class="element__description">
-              <h2 class="element__name">Antilope Canyon</h2>
-              <button type="button" class="element__like"></button>
-            </div>
-          </div>
-          <div class="element">
-            <img src="./images/niagara.jpg" alt="Niagara Falls in NY" class="element__image">
-            <div class="element__description">
-              <h2 class="element__name">Niagara Falls</h2>
-              <button type="button" class="element__like"></button>
-            </div>
-          </div>
-          <div class="element">
-            <img src="./images/monument.jpg" alt="photo of monument valley in AZ" class="element__image">
-            <div class="element__description">
-              <h2 class="element__name">Monument Valley</h2>
-              <button type="button" class="element__like"></button>
-            </div>
-          </div>
+        <section class="elements"> 
         </section>
       </main>
 
       <footer class="footer">
           <p class="footer__text"> © 2020 Around The U.S.</p>
       </footer>
-      <div class="modal">
+      <div class="modal modal_type_edit-profile">
         <div class="modal__container">
           <button type="button" class="modal__close-button"></button>
           <h3 class="modal__title">Edit profile</h3>
           <form action="#" class="form" method="POST">
-              <input type="text" class="form__name" value="">
-              <input type="text" class="form__about" value="">
+              <input type="text" class="form__input form__input_type_profile-name" value= "" placeholder="Name">
+              <input type="text" class="form__input form__input_type_profile-description" value="" placeholder="Description">
               <button class="form__submit" type="submit">Save</button>
           </form>
         </div>
       </div>
-      <template class="modal-place">
+      <div class="modal modal_type_add-place">
         <div class="modal__container">
           <button type="button" class="modal__close-button"></button>
-          <h3 class="modal-place__title">New Place</h3>
+          <h3 class="modal-place__title">New place</h3>
           <form action="#" class="form" method="POST">
-              <input type="text" class="form__name" value="">
-              <input type="text" class="form__about" value="">
+              <input type="text" class="form__input form__input_type_place-title" value="" placeholder="Title">
+              <input type="url" class="form__input form__input_type_place-link" value="" placeholder="Image Link">
               <button class="form__submit" type="submit">Save</button>
           </form>
+        </div>
+      </div>
+      <!-- <div class="modal modal_type_image">
+        <div class="modal__container">
+          <button type="button" class="modal__close-button"></button>
+          <h3 class="modal-place__title">New place</h3>
+          <form action="#" class="form" method="POST">
+              <input type="text" class="form__input form__input_type_place-title" value="" placeholder="Title">
+              <input type="url" class="form__input form__input_type_place-link" value="" placeholder="Image Link">
+              <button class="form__submit" type="submit">Save</button>
+          </form>
+        </div> -->
+
+      </div>
+      <template class="element-template">
+        <div class="element">
+          <button type="submit" class="element__delete"></button>
+          <div class="element__image" style = ""></div>
+          <div class="element__description">
+            <h2 class="element__name"></h2>
+            <button type="button" class="element__like"></button>
+          </div>
         </div>
       </template>
     </div>
