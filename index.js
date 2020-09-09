@@ -1,23 +1,25 @@
-// Modals
+//modals
 const editProfileModal = document.querySelector('.modal_type_edit-profile');
 const newPlaceModal = document.querySelector('.modal_type_add-place');
-// Open Modals buttons
+//open modal buttons
 const profileEditButton = document.querySelector('.profile__edit');
-const addPlaceModal = document.querySelector('.profile__add');
-//Close Buttons
+const addNewPlaceButton = document.querySelector('.profile__add');
+//close Buttons
 const closeEditProfileModal = editProfileModal.querySelector('.modal__close-button');
-const closeNewPlaceModal = newPlaceModal.querySelector('.modal__close-button')
-// profile
+const closeNewPlaceModal = newPlaceModal.querySelector('.modal__close-button');
+//profile
 const profileName = document.querySelector('.profile__name');
 const profileAbout = document.querySelector('.profile__about');
-//form inputs
-const form = document.querySelector('.form');
-const formName = document.querySelector('.form__input_type_profile-name');
-const formAbout = document.querySelector('.form__input_type_profile-description');
+//profile form inputs
+const profileSubmitForm = editProfileModal.querySelector('.form');
+const profileNameForm = document.querySelector('.form__input_type_profile-name');
+const profileAboutForm = document.querySelector('.form__input_type_profile-description');
+//add new place form inputs
+const addNewPlaceSubmitForm = newPlaceModal.querySelector('.form');
+const addNewPlaceTitleForm = newPlaceModal.querySelector('.form__input_type_place-title');
+const addNewPlaceImageForm = newPlaceModal.querySelector('.form__input_type_place-link');
 
-addPlaceModal.addEventListener('click', ()=> {
-  newPlaceModal.classList.toggle('modal_open');
-})
+
 
 const initialCards = [
   {
@@ -50,43 +52,69 @@ const element = document.querySelector('.element-template').content.querySelecto
 const elements = document.querySelector('.elements');
 
 initialCards.forEach(data => {
-  
   const elementContent = element.cloneNode(true);
-
-
 
   const elementImage = elementContent.querySelector('.element__image');
   const elementTitle = elementContent.querySelector('.element__name');
   const elementLike = elementContent.querySelector('.element__like');
   const elementDelete  = elementContent.querySelector('.element__delete');
-  
+
   elementTitle.textContent = data.name;
   elementImage.style.backgroundImage = `url(${data.link})`;
+
   elements.prepend(elementContent);
 });
 
 function toggleModal (modal) {
   modal.classList.toggle('modal_open');
 }
-
-function openEditModal () {
-  formName.value = profileName.textContent;
-  formAbout.value = profileAbout.textContent;
+//open profile edit modal
+function openProfileEditModal () {
+  profileName.value = profileNameForm.textContent;
+  profileAbout.value = profileAboutForm.textContent;
   toggleModal(editProfileModal);
 }
-
-
-function formSubmit (e) {
+//submit profile edit form
+function profileFormSubmit (e) {
   e.preventDefault ();
-  profileName.textContent = formName.value;
-  profileAbout.textContent = formAbout.value;
-  editProfileModal.classList.toggle('modal_open');
+  profileName.textContent = profileNameForm.value;
+  profileAbout.textContent = profileAboutForm.value;
+  toggleModal(editProfileModal);
 }
 
 
-profileEditButton.addEventListener('click', openEditModal);
-//close Edit Profile Window
-closeEditProfileModal.addEventListener('click', () =>  {
-  toggleModal(editProfileModal);
 
-form.addEventListener('submit', formSubmit);
+//actions with profile edit modal
+profileEditButton.addEventListener('click', openProfileEditModal);
+profileSubmitForm.addEventListener('submit', profileFormSubmit);
+closeEditProfileModal.addEventListener('click', () => {
+  profileNameForm.value = profileName.textContent;
+  profileAboutForm.value = profileAbout.textContent;
+  toggleModal(editProfileModal);
+});
+
+//open add new place modal
+addNewPlaceButton.addEventListener('click', () => {
+  toggleModal(newPlaceModal);
+});
+
+//function for submit add new place form
+function newPlaceFormSubmit (e) {
+  e.preventDefault ();
+  elementName = addNewPlaceTitleForm.value;
+  elementLink = addNewPlaceImageForm.value;
+  const elementContent = element.cloneNode(true);
+  const elementImage = elementContent.querySelector('.element__image');
+  const elementTitle = elementContent.querySelector('.element__name');
+  const elementLike = elementContent.querySelector('.element__like');
+  const elementDelete  = elementContent.querySelector('.element__delete');
+  elementTitle.textContent = elementName;
+  elementImage.style.backgroundImage = `url(${elementLink})`;
+  initialCards.push({name: elementName, link: elementLink});
+  elements.prepend(elementContent);
+  toggleModal(newPlaceModal);
+}
+//submit new place in modal
+addNewPlaceSubmitForm.addEventListener('submit', newPlaceFormSubmit);
+
+
