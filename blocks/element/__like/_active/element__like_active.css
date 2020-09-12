@@ -1,0 +1,15 @@
+.element__like_active {
+  margin-right: 18px;
+  background: url(../../../../images/like_full.svg) center no-repeat;
+  padding: 11px;
+  border: none;
+  cursor: pointer;
+  align-self: center;
+  /* for smooth transition on hover off */
+  transition: ease .5s;
+}
+
+.element__like_active:hover {
+  opacity: .5;
+  transition: ease .5s;
+}

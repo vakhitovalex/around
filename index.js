@@ -56,7 +56,9 @@ initialCards.forEach(data => {
 
   const elementImage = elementContent.querySelector('.element__image');
   const elementTitle = elementContent.querySelector('.element__name');
-  const elementLike = elementContent.querySelector('.element__like');
+  const elementLike = elementContent.querySelector('.element__like').addEventListener('click', function (like) {
+    like.target.classList.toggle('element__like_active');
+  });
   const elementDelete  = elementContent.querySelector('.element__delete');
 
   elementTitle.textContent = data.name;
@@ -106,7 +108,9 @@ function newPlaceFormSubmit (e) {
   const elementContent = element.cloneNode(true);
   const elementImage = elementContent.querySelector('.element__image');
   const elementTitle = elementContent.querySelector('.element__name');
-  const elementLike = elementContent.querySelector('.element__like');
+  const elementLike = elementContent.querySelector('.element__like').addEventListener('click', function (like) {
+    like.target.classList.toggle('element__like_active');
+  });
   const elementDelete  = elementContent.querySelector('.element__delete');
   elementTitle.textContent = elementName;
   elementImage.style.backgroundImage = `url(${elementLink})`;
@@ -117,4 +121,24 @@ function newPlaceFormSubmit (e) {
 //submit new place in modal
 addNewPlaceSubmitForm.addEventListener('submit', newPlaceFormSubmit);
 
+
+//like button functionality
+
+//const likeElements = document.querySelector('.element__like');
+
+// function likeClicked (likedElement) {
+//   likedElement.classList.toggle('element__like_active');
+// }
+
+// element.querySelector('.element__like').addEventListener('click', () => {
+//   const likeElement = document.querySelector('.element__like');
+//   likeClicked(likeElement);
+// });
+
+
+
+// const elementLike = document.querySelector('.element__like');
+// elementLike.addEventListener('click', () => {
+//   elementLike.classList.toggle('element__like_active');
+// });
 
