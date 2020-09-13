@@ -1,12 +1,14 @@
 //modals
 const editProfileModal = document.querySelector('.modal_type_edit-profile');
 const newPlaceModal = document.querySelector('.modal_type_add-place');
+const imageModal = document.querySelector('.modal_type_image');
 //open modal buttons
 const profileEditButton = document.querySelector('.profile__edit');
 const addNewPlaceButton = document.querySelector('.profile__add');
 //close Buttons
 const closeEditProfileModal = editProfileModal.querySelector('.modal__close-button');
 const closeNewPlaceModal = newPlaceModal.querySelector('.modal__close-button');
+const closeImageModal = imageModal.querySelector('.modal__close-button');
 //profile
 const profileName = document.querySelector('.profile__name');
 const profileAbout = document.querySelector('.profile__about');
@@ -55,11 +57,19 @@ initialCards.forEach(data => {
   const elementContent = element.cloneNode(true);
 
   const elementImage = elementContent.querySelector('.element__image');
-  const elementTitle = elementContent.querySelector('.element__name');
-  const elementLike = elementContent.querySelector('.element__like').addEventListener('click', function (like) {
-    like.target.classList.toggle('element__like_active');
+  elementImage.addEventListener('click', () => {
+    imageModal.querySelector('.modal__img').src = `${data.link}`;
+    imageModal.querySelector('.modal__img').alt = `${data.name}`;
+    imageModal.querySelector('.modal__imgname').textContent = `${data.name}`;
+    toggleModal(imageModal);
   });
-  const elementDelete  = elementContent.querySelector('.element__delete');
+  const elementTitle = elementContent.querySelector('.element__name');
+  const elementLike = elementContent.querySelector('.element__like').addEventListener('click', function (e) {
+    e.target.classList.toggle('element__like_active');
+  });
+  elementContent.querySelector('.element__delete').addEventListener('click', function () {
+    elementContent.remove();
+  });
 
   elementTitle.textContent = data.name;
   elementImage.style.backgroundImage = `url(${data.link})`;
@@ -84,8 +94,6 @@ function profileFormSubmit (e) {
   toggleModal(editProfileModal);
 }
 
-
-
 //actions with profile edit modal
 profileEditButton.addEventListener('click', openProfileEditModal);
 profileSubmitForm.addEventListener('submit', profileFormSubmit);
@@ -107,38 +115,47 @@ function newPlaceFormSubmit (e) {
   elementLink = addNewPlaceImageForm.value;
   const elementContent = element.cloneNode(true);
   const elementImage = elementContent.querySelector('.element__image');
-  const elementTitle = elementContent.querySelector('.element__name');
-  const elementLike = elementContent.querySelector('.element__like').addEventListener('click', function (like) {
-    like.target.classList.toggle('element__like_active');
+  elementImage.addEventListener('click', () => {
+    imageModal.querySelector('.modal__img').src = elementLink;
+    imageModal.querySelector('.modal__img').alt = elementName;
+    imageModal.querySelector('.modal__imgname').textContent = elementName;
+    toggleModal(imageModal);
   });
-  const elementDelete  = elementContent.querySelector('.element__delete');
+  const elementTitle = elementContent.querySelector('.element__name');
+  const elementLike = elementContent.querySelector('.element__like').addEventListener('click', (e) => {
+    e.target.classList.toggle('element__like_active');
+  });
+  elementContent.querySelector('.element__delete').addEventListener('click', () => {
+    elementContent.remove();
+  });
   elementTitle.textContent = elementName;
   elementImage.style.backgroundImage = `url(${elementLink})`;
   initialCards.push({name: elementName, link: elementLink});
   elements.prepend(elementContent);
+  addNewPlaceSubmitForm.reset();
   toggleModal(newPlaceModal);
 }
+
 //submit new place in modal
 addNewPlaceSubmitForm.addEventListener('submit', newPlaceFormSubmit);
+//close Add new place modal
+closeNewPlaceModal.addEventListener('click', () => {
+  //reset form inputs with closure
+  addNewPlaceSubmitForm.reset();
+  toggleModal(newPlaceModal);
+});
+
+//close Image modal
+closeImageModal.addEventListener('click', () => {
+  toggleModal(imageModal);
+});
+
+
 
 
 //like button functionality
-
 //const likeElements = document.querySelector('.element__like');
-
 // function likeClicked (likedElement) {
 //   likedElement.classList.toggle('element__like_active');
 // }
-
-// element.querySelector('.element__like').addEventListener('click', () => {
-//   const likeElement = document.querySelector('.element__like');
-//   likeClicked(likeElement);
-// });
-
-
-
-// const elementLike = document.querySelector('.element__like');
-// elementLike.addEventListener('click', () => {
-//   elementLike.classList.toggle('element__like_active');
-// });
 

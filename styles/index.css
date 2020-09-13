@@ -6,6 +6,7 @@
 @import url(../blocks/profile/profile.css);
 @import url(../blocks/modal/modal.css);
 @import url(../blocks/modal/_open/modal_open.css);
+@import url(../blocks/modal/_type/modal_type_image.css);
 @import url(../blocks/form/form.css);
 @import url(../blocks/elements/elements.css);
 @import url(../blocks/element/element.css);
