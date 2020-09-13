@@ -21,8 +21,6 @@ const addNewPlaceSubmitForm = newPlaceModal.querySelector('.form');
 const addNewPlaceTitleForm = newPlaceModal.querySelector('.form__input_type_place-title');
 const addNewPlaceImageForm = newPlaceModal.querySelector('.form__input_type_place-link');
 
-
-
 const initialCards = [
   {
     name: 'Yosemite Valley',
@@ -55,7 +53,6 @@ const elements = document.querySelector('.elements');
 
 initialCards.forEach(data => {
   const elementContent = element.cloneNode(true);
-
   const elementImage = elementContent.querySelector('.element__image');
   elementImage.addEventListener('click', () => {
     imageModal.querySelector('.modal__img').src = `${data.link}`;
@@ -110,7 +107,6 @@ addNewPlaceButton.addEventListener('click', () => {
 
 //function for submit add new place form
 function newPlaceFormSubmit (e) {
-  e.preventDefault ();
   elementName = addNewPlaceTitleForm.value;
   elementLink = addNewPlaceImageForm.value;
   const elementContent = element.cloneNode(true);
