@@ -107,6 +107,7 @@ addNewPlaceButton.addEventListener('click', () => {
 
 //function for submit add new place form
 function newPlaceFormSubmit (e) {
+  e.preventDefault ();
   elementName = addNewPlaceTitleForm.value;
   elementLink = addNewPlaceImageForm.value;
   const elementContent = element.cloneNode(true);
