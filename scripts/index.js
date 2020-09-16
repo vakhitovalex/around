@@ -20,6 +20,14 @@ const profileAboutForm = document.querySelector('.form__input_type_profile-descr
 const addNewPlaceSubmitForm = newPlaceModal.querySelector('.form');
 const addNewPlaceTitleForm = newPlaceModal.querySelector('.form__input_type_place-title');
 const addNewPlaceImageForm = newPlaceModal.querySelector('.form__input_type_place-link');
+//template variables
+const element = document.querySelector('.element-template').content.querySelector('.element');
+// const elementLike = elementContent.querySelector('.element__like');
+const elements = document.querySelector('.elements');
+
+//show place modal variables
+const imgFigure = imageModal.querySelector('.modal__img');
+const captionFigure = imageModal.querySelector('.modal__imgname');
 
 const initialCards = [
   {
@@ -48,41 +56,46 @@ const initialCards = [
   }
 ];
 
-const element = document.querySelector('.element-template').content.querySelector('.element');
-const elements = document.querySelector('.elements');
-
-initialCards.forEach(data => {
+function createCard (data) {
   const elementContent = element.cloneNode(true);
   const elementImage = elementContent.querySelector('.element__image');
+  const elementLike = elementContent.querySelector('.element__like');
+  const elementTitle = elementContent.querySelector('.element__name');
+  const elementDelete = elementContent.querySelector('.element__delete');
+
   elementImage.addEventListener('click', () => {
-    imageModal.querySelector('.modal__img').src = `${data.link}`;
-    imageModal.querySelector('.modal__img').alt = `${data.name}`;
-    imageModal.querySelector('.modal__imgname').textContent = `${data.name}`;
+    imgFigure.src = `${data.link}`;
+    captionFigure.alt = `${data.name}`;
+    captionFigure.textContent = `${data.name}`;
     toggleModal(imageModal);
   });
-  const elementTitle = elementContent.querySelector('.element__name');
-  const elementLike = elementContent.querySelector('.element__like').addEventListener('click', function (e) {
+
+  elementLike.addEventListener('click', (e) => {
     e.target.classList.toggle('element__like_active');
   });
-  elementContent.querySelector('.element__delete').addEventListener('click', function () {
+  elementDelete.addEventListener('click', () => {
     elementContent.remove();
   });
 
   elementTitle.textContent = data.name;
   elementImage.style.backgroundImage = `url(${data.link})`;
+  return elementContent;
+}
 
-  elements.prepend(elementContent);
+function addCard (data) {
+  elements.prepend(createCard(data));
+}
+
+//add cards to initial array
+initialCards.forEach(data => {
+  addCard(data);
 });
 
+//open/close modal
 function toggleModal (modal) {
   modal.classList.toggle('modal_open');
 }
-//open profile edit modal
-function openProfileEditModal () {
-  profileName.value = profileNameForm.textContent;
-  profileAbout.value = profileAboutForm.textContent;
-  toggleModal(editProfileModal);
-}
+
 //submit profile edit form
 function profileFormSubmit (e) {
   e.preventDefault ();
@@ -92,11 +105,12 @@ function profileFormSubmit (e) {
 }
 
 //actions with profile edit modal
-profileEditButton.addEventListener('click', openProfileEditModal);
+profileEditButton.addEventListener('click', () => {
+  toggleModal(editProfileModal);
+});
 profileSubmitForm.addEventListener('submit', profileFormSubmit);
 closeEditProfileModal.addEventListener('click', () => {
-  profileNameForm.value = profileName.textContent;
-  profileAboutForm.value = profileAbout.textContent;
+  profileSubmitForm.reset();
   toggleModal(editProfileModal);
 });
 
@@ -105,39 +119,16 @@ addNewPlaceButton.addEventListener('click', () => {
   toggleModal(newPlaceModal);
 });
 
-//function for submit add new place form
-function newPlaceFormSubmit (e) {
-  e.preventDefault ();
-  elementName = addNewPlaceTitleForm.value;
-  elementLink = addNewPlaceImageForm.value;
-  const elementContent = element.cloneNode(true);
-  const elementImage = elementContent.querySelector('.element__image');
-  elementImage.addEventListener('click', () => {
-    imageModal.querySelector('.modal__img').src = elementLink;
-    imageModal.querySelector('.modal__img').alt = elementName;
-    imageModal.querySelector('.modal__imgname').textContent = elementName;
-    toggleModal(imageModal);
-  });
-  const elementTitle = elementContent.querySelector('.element__name');
-  const elementLike = elementContent.querySelector('.element__like').addEventListener('click', (e) => {
-    e.target.classList.toggle('element__like_active');
-  });
-  elementContent.querySelector('.element__delete').addEventListener('click', () => {
-    elementContent.remove();
-  });
-  elementTitle.textContent = elementName;
-  elementImage.style.backgroundImage = `url(${elementLink})`;
-  initialCards.push({name: elementName, link: elementLink});
-  elements.prepend(elementContent);
+//submit new place in modal
+addNewPlaceSubmitForm.addEventListener('submit', (e) => {
+  e.preventDefault();
+  addCard({name: addNewPlaceTitleForm.value, link:addNewPlaceImageForm.value});
   addNewPlaceSubmitForm.reset();
   toggleModal(newPlaceModal);
-}
+});
 
-//submit new place in modal
-addNewPlaceSubmitForm.addEventListener('submit', newPlaceFormSubmit);
 //close Add new place modal
 closeNewPlaceModal.addEventListener('click', () => {
-  //reset form inputs with closure
   addNewPlaceSubmitForm.reset();
   toggleModal(newPlaceModal);
 });
@@ -146,13 +137,3 @@ closeNewPlaceModal.addEventListener('click', () => {
 closeImageModal.addEventListener('click', () => {
   toggleModal(imageModal);
 });
-
-
-
-
-//like button functionality
-//const likeElements = document.querySelector('.element__like');
-// function likeClicked (likedElement) {
-//   likedElement.classList.toggle('element__like_active');
-// }
-
