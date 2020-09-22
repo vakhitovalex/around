@@ -107,7 +107,10 @@ function profileFormSubmit (e) {
 //actions with profile edit modal
 profileEditButton.addEventListener('click', () => {
   toggleModal(editProfileModal);
+  profileNameForm.value = profileName.textContent;
+  profileAboutForm.value = profileAbout.textContent;
 });
+
 profileSubmitForm.addEventListener('submit', profileFormSubmit);
 closeEditProfileModal.addEventListener('click', () => {
   profileSubmitForm.reset();
