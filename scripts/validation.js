@@ -24,6 +24,7 @@ const toggleButtonState = (inputs, button, {inactiveButtonClass, ...rest}) => {
   const isValid = inputs.every((inputElement) => inputElement.validity.valid);
   if (isValid) {
     button.classList.remove(inactiveButtonClass);
+    button.removeAttribute('disabled', true);
   } else {
     button.classList.add(inactiveButtonClass);
     button.setAttribute('disabled', true);
@@ -38,8 +39,10 @@ const enableValidation = ({formSelector, inputSelector, submitButtonSelector, ..
     formElement.addEventListener('submit', ((evt) => {
       evt.preventDefault();
     }));
+
     const inputs = Array.from(formElement.querySelectorAll(inputSelector));
     const button = formElement.querySelector(submitButtonSelector);
+    // toggleButtonState(inputs, button, rest);
     inputs.forEach((inputElement) => {
       inputElement.addEventListener('input', () => {
         //check input validity
