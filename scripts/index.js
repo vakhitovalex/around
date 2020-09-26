@@ -2,6 +2,7 @@
 const editProfileModal = document.querySelector('.modal_type_edit-profile');
 const newPlaceModal = document.querySelector('.modal_type_add-place');
 const imageModal = document.querySelector('.modal_type_image');
+const modalContainer = document.querySelector('.modal__container');
 //open modal buttons
 const profileEditButton = document.querySelector('.profile__edit');
 const addNewPlaceButton = document.querySelector('.profile__add');
@@ -28,6 +29,10 @@ const elements = document.querySelector('.elements');
 //show place modal variables
 const imgFigure = imageModal.querySelector('.modal__img');
 const captionFigure = imageModal.querySelector('.modal__imgname');
+
+
+
+
 
 const initialCards = [
   {
@@ -94,6 +99,16 @@ initialCards.forEach(data => {
 //open/close modal
 function toggleModal (modal) {
   modal.classList.toggle('modal_open');
+  modal.addEventListener('click', (evt) => {
+    if (evt.target.classList.contains('modal_open')) {
+      toggleModal(modal);
+    }
+  });
+  document.addEventListener('keydown', (evt) => {
+    if (evt.key === 'Escape') {
+      toggleModal(modal);
+    }
+  });
 }
 
 //submit profile edit form
