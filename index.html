@@ -40,9 +40,11 @@
         <div class="modal__container">
           <button type="button" class="modal__close-button"></button>
           <h3 class="modal__title">Edit profile</h3>
-          <form action="#" class="form" method="POST">
-              <input type="text" class="form__input form__input_type_profile-name" value= "" placeholder="Name">
-              <input type="text" class="form__input form__input_type_profile-description" value="" placeholder="Description">
+          <form action="#" class="form" method="POST" novalidate>
+              <input id="profile-name" type="text" class="form__input form__input_type_profile-name" value= "" placeholder="Name" required minlength="2" maxlength="40">
+              <span id="profile-name-error" class="form__error"></span>
+              <input id="profile-info" type="text" class="form__input form__input_type_profile-description" value="" placeholder="Description" required minlength="2" maxlength="200">
+              <span id="profile-info-error" class="form__error"></span>
               <button class="form__submit" type="submit">Save</button>
           </form>
         </div>
@@ -51,9 +53,11 @@
         <div class="modal__container">
           <button type="button" class="modal__close-button"></button>
           <h3 class="modal__title">New place</h3>
-          <form action="#" class="form" method="POST">
-              <input type="text" class="form__input form__input_type_place-title" value="" placeholder="Title">
-              <input type="url" class="form__input form__input_type_place-link" value="" placeholder="Image Link">
+          <form action="#" class="form" method="POST" novalidate>
+              <input id="place-title" type="text" class="form__input form__input_type_place-title" value="" placeholder="Title" minlength="1" maxlength="30">
+              <span id="place-title-error" class="form__error"></span>
+              <input id="place-url" type="url" class="form__input form__input_type_place-link" value="" placeholder="Image Link" required>
+              <span id="place-url-error" class="form__error"></span>
               <button class="form__submit" type="submit">Save</button>
           </form>
         </div>
@@ -77,8 +81,7 @@
       </template>
     </div>
 
-
-
+    <script src="./scripts/validation.js"></script>
     <script src="./scripts/index.js"></script>
   </body>
 </html>
