@@ -21,6 +21,7 @@ const profileAboutForm = document.querySelector('.form__input_type_profile-descr
 const addNewPlaceSubmitForm = newPlaceModal.querySelector('.form');
 const addNewPlaceTitleForm = newPlaceModal.querySelector('.form__input_type_place-title');
 const addNewPlaceImageForm = newPlaceModal.querySelector('.form__input_type_place-link');
+const submitNewPlace = newPlaceModal.querySelector(".form__submit");
 //template variables
 const element = document.querySelector('.element-template').content.querySelector('.element');
 // const elementLike = elementContent.querySelector('.element__like');
@@ -96,19 +97,31 @@ initialCards.forEach(data => {
   addCard(data);
 });
 
-//open/close modal
+//click outside of modal window handler
+function closeByClick (evt) {
+  if (evt.target.classList.contains('modal_open')) {
+    const modal = document.querySelector('.modal_open');
+    toggleModal(modal);
+  }
+}
+//escape button handler
+function closeByEsc (evt) {
+  if (evt.key === 'Escape') {
+    const modal = document.querySelector('.modal_open');
+    toggleModal(modal);
+  }
+}
+
 function toggleModal (modal) {
+  if (!modal.classList.contains('modal_open')) {
+      document.addEventListener('keydown', closeByEsc);
+      modal.addEventListener('click', closeByClick);
+    }
+    else {
+      document.removeEventListener('keydown', closeByEsc);
+      modal.removeEventListener('click', closeByClick);
+    }
   modal.classList.toggle('modal_open');
-  modal.addEventListener('click', (evt) => {
-    if (evt.target.classList.contains('modal_open')) {
-      toggleModal(modal);
-    }
-  });
-  document.addEventListener('keydown', (evt) => {
-    if (evt.key === 'Escape') {
-      toggleModal(modal);
-    }
-  });
 }
 
 //submit profile edit form
@@ -143,6 +156,8 @@ addNewPlaceSubmitForm.addEventListener('submit', (e) => {
   addCard({name: addNewPlaceTitleForm.value, link:addNewPlaceImageForm.value});
   addNewPlaceSubmitForm.reset();
   toggleModal(newPlaceModal);
+  submitNewPlace.setAttribute('disabled', true);
+  submitNewPlace.classList.add("form__submit_inactive");
 });
 
 //close Add new place modal
