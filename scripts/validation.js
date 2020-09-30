@@ -42,12 +42,11 @@ const enableValidation = ({formSelector, inputSelector, submitButtonSelector, ..
   forms.forEach((formElement) => {
     formElement.addEventListener('submit', ((evt) => {
       evt.preventDefault();
-      // console.log(evt.target);
       toggleButtonState(inputs, button, rest);
     }));
-
     const inputs = Array.from(formElement.querySelectorAll(inputSelector));
     const button = formElement.querySelector(submitButtonSelector);
+
     inputs.forEach((inputElement) => {
       inputElement.addEventListener('input', () => {
         //check input validity

@@ -156,8 +156,8 @@ addNewPlaceSubmitForm.addEventListener('submit', (e) => {
   addCard({name: addNewPlaceTitleForm.value, link:addNewPlaceImageForm.value});
   addNewPlaceSubmitForm.reset();
   toggleModal(newPlaceModal);
-  submitNewPlace.setAttribute('disabled', true);
-  submitNewPlace.classList.add("form__submit_inactive");
+  // submitNewPlace.setAttribute('disabled', true);
+  // submitNewPlace.classList.add("form__submit_inactive");
 });
 
 //close Add new place modal
