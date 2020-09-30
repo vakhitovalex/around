@@ -26,11 +26,14 @@ const isInvalid = (inputs) => {
   });
 };
 
+const makeSubmitButtonDisabled = (button, inactiveButtonClass) => {
+  button.classList.add(inactiveButtonClass);
+  button.setAttribute('disabled', true);
+};
 
 const toggleButtonState = (inputs, button, {inactiveButtonClass, ...rest}) => {
   if (isInvalid(inputs)) {
-    button.classList.add(inactiveButtonClass);
-    button.setAttribute('disabled', true);
+    makeSubmitButtonDisabled(button, inactiveButtonClass);
   } else {
     button.classList.remove(inactiveButtonClass);
     button.removeAttribute('disabled', true);
