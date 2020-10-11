@@ -1,8 +1,32 @@
+import FormValidator from './FormValidator.js';
+import Card from './Card.js';
+
+const settings  = {
+  formSelector: ".form",
+  inputSelector: ".form__input",
+  submitButtonSelector: ".form__submit",
+  inactiveButtonClass: "form__submit_inactive",
+  inputErrorClass: "form__error",
+  errorClass: "form__error_active"
+};
 //modals
 const editProfileModal = document.querySelector('.modal_type_edit-profile');
 const newPlaceModal = document.querySelector('.modal_type_add-place');
 const imageModal = document.querySelector('.modal_type_image');
-const modalContainer = document.querySelector('.modal__container');
+
+const profileSubmitForm = editProfileModal.querySelector('.form');
+const addNewPlaceSubmitForm = newPlaceModal.querySelector('.form');
+
+const editProfileModalValidator = new FormValidator(settings, profileSubmitForm);
+const newPlaceModalValidator = new FormValidator(settings, addNewPlaceSubmitForm);
+
+editProfileModalValidator.enableValidation();
+newPlaceModalValidator.enableValidation();
+
+//modals
+// const editProfileModal = document.querySelector('.modal_type_edit-profile');
+// const newPlaceModal = document.querySelector('.modal_type_add-place');
+
 //open modal buttons
 const profileEditButton = document.querySelector('.profile__edit');
 const addNewPlaceButton = document.querySelector('.profile__add');
@@ -14,11 +38,11 @@ const closeImageModal = imageModal.querySelector('.modal__close-button');
 const profileName = document.querySelector('.profile__name');
 const profileAbout = document.querySelector('.profile__about');
 //profile form inputs
-const profileSubmitForm = editProfileModal.querySelector('.form');
+
 const profileNameForm = document.querySelector('.form__input_type_profile-name');
 const profileAboutForm = document.querySelector('.form__input_type_profile-description');
 //add new place form inputs
-const addNewPlaceSubmitForm = newPlaceModal.querySelector('.form');
+
 const addNewPlaceTitleForm = newPlaceModal.querySelector('.form__input_type_place-title');
 const addNewPlaceImageForm = newPlaceModal.querySelector('.form__input_type_place-link');
 const submitNewPlace = newPlaceModal.querySelector(".form__submit");
@@ -31,10 +55,6 @@ const elements = document.querySelector('.elements');
 const imgFigure = imageModal.querySelector('.modal__img');
 const captionFigure = imageModal.querySelector('.modal__imgname');
 
-
-
-
-
 const initialCards = [
   {
     name: 'Yosemite Valley',
@@ -42,7 +62,7 @@ const initialCards = [
   },
   {
     name: 'Lake Tahoe',
-    link: './images/tahoe.jpg'
+    link: './images/tahoe.jpg',
   },
   {
     name: 'Sequoia National Park',
@@ -62,39 +82,14 @@ const initialCards = [
   }
 ];
 
-function createCard (data) {
-  const elementContent = element.cloneNode(true);
-  const elementImage = elementContent.querySelector('.element__image');
-  const elementLike = elementContent.querySelector('.element__like');
-  const elementTitle = elementContent.querySelector('.element__name');
-  const elementDelete = elementContent.querySelector('.element__delete');
-
-  elementImage.addEventListener('click', () => {
-    imgFigure.src = `${data.link}`;
-    captionFigure.alt = `${data.name}`;
-    captionFigure.textContent = `${data.name}`;
-    toggleModal(imageModal);
-  });
-
-  elementLike.addEventListener('click', (e) => {
-    e.target.classList.toggle('element__like_active');
-  });
-  elementDelete.addEventListener('click', () => {
-    elementContent.remove();
-  });
-
-  elementTitle.textContent = data.name;
-  elementImage.style.backgroundImage = `url(${data.link})`;
-  return elementContent;
+const addCard = (data) => {
+  const card = new Card (data, ".element-template");
+  const cardElement = card.getCard();
+  elements.append(cardElement);
 }
 
-function addCard (data) {
-  elements.prepend(createCard(data));
-}
-
-//add cards to initial array
-initialCards.forEach(data => {
-  addCard(data);
+initialCards.forEach((item) => {
+  addCard(item);
 });
 
 //click outside of modal window handler
@@ -150,6 +145,11 @@ addNewPlaceButton.addEventListener('click', () => {
   toggleModal(newPlaceModal);
 });
 
+const makeSubmitButtonDisabled = (button, inactiveButtonClass) => {
+  button.classList.add(inactiveButtonClass);
+  button.setAttribute('disabled', true);
+};
+
 //submit new place in modal
 addNewPlaceSubmitForm.addEventListener('submit', (e) => {
   e.preventDefault();
@@ -170,3 +170,29 @@ closeNewPlaceModal.addEventListener('click', () => {
 closeImageModal.addEventListener('click', () => {
   toggleModal(imageModal);
 });
+
+// function createCard (data) {
+//   const elementContent = element.cloneNode(true);
+//   const elementImage = elementContent.querySelector('.element__image');
+//   const elementLike = elementContent.querySelector('.element__like');
+//   const elementTitle = elementContent.querySelector('.element__name');
+//   const elementDelete = elementContent.querySelector('.element__delete');
+
+//   elementImage.addEventListener('click', () => {
+//     imgFigure.src = `${data.link}`;
+//     captionFigure.alt = `${data.name}`;
+//     captionFigure.textContent = `${data.name}`;
+//     toggleModal(imageModal);
+//   });
+
+//   elementLike.addEventListener('click', (e) => {
+//     e.target.classList.toggle('element__like_active');
+//   });
+//   elementDelete.addEventListener('click', () => {
+//     elementContent.remove();
+//   });
+
+//   elementTitle.textContent = data.name;
+//   elementImage.style.backgroundImage = `url(${data.link})`;
+//   return elementContent;
+// }
