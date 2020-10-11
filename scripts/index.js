@@ -1,5 +1,6 @@
 import FormValidator from './FormValidator.js';
 import Card from './Card.js';
+import disableButton from './FormValidator.js';
 
 const settings  = {
   formSelector: ".form",
@@ -13,6 +14,7 @@ const settings  = {
 const editProfileModal = document.querySelector('.modal_type_edit-profile');
 const newPlaceModal = document.querySelector('.modal_type_add-place');
 const imageModal = document.querySelector('.modal_type_image');
+const submitNewPlace = newPlaceModal.querySelector(".form__submit");
 
 const profileSubmitForm = editProfileModal.querySelector('.form');
 const addNewPlaceSubmitForm = newPlaceModal.querySelector('.form');
@@ -20,8 +22,10 @@ const addNewPlaceSubmitForm = newPlaceModal.querySelector('.form');
 const editProfileModalValidator = new FormValidator(settings, profileSubmitForm);
 const newPlaceModalValidator = new FormValidator(settings, addNewPlaceSubmitForm);
 
+
 editProfileModalValidator.enableValidation();
 newPlaceModalValidator.enableValidation();
+
 
 //modals
 // const editProfileModal = document.querySelector('.modal_type_edit-profile');
@@ -45,7 +49,7 @@ const profileAboutForm = document.querySelector('.form__input_type_profile-descr
 
 const addNewPlaceTitleForm = newPlaceModal.querySelector('.form__input_type_place-title');
 const addNewPlaceImageForm = newPlaceModal.querySelector('.form__input_type_place-link');
-const submitNewPlace = newPlaceModal.querySelector(".form__submit");
+
 //template variables
 const element = document.querySelector('.element-template').content.querySelector('.element');
 // const elementLike = elementContent.querySelector('.element__like');
@@ -86,7 +90,7 @@ const addCard = (data) => {
   const card = new Card (data, ".element-template");
   const cardElement = card.getCard();
   elements.append(cardElement);
-}
+};
 
 initialCards.forEach((item) => {
   addCard(item);
@@ -145,25 +149,20 @@ addNewPlaceButton.addEventListener('click', () => {
   toggleModal(newPlaceModal);
 });
 
-const makeSubmitButtonDisabled = (button, inactiveButtonClass) => {
-  button.classList.add(inactiveButtonClass);
-  button.setAttribute('disabled', true);
-};
-
 //submit new place in modal
 addNewPlaceSubmitForm.addEventListener('submit', (e) => {
   e.preventDefault();
   addCard({name: addNewPlaceTitleForm.value, link:addNewPlaceImageForm.value});
   addNewPlaceSubmitForm.reset();
   toggleModal(newPlaceModal);
-  makeSubmitButtonDisabled(submitNewPlace, 'form__submit_inactive');
+  new disableButton(submitNewPlace, settings.inactiveButtonClass);
 });
 
 //close Add new place modal
 closeNewPlaceModal.addEventListener('click', () => {
   addNewPlaceSubmitForm.reset();
   toggleModal(newPlaceModal);
-  makeSubmitButtonDisabled(submitNewPlace, 'form__submit_inactive');
+  new disableButton(submitNewPlace, settings.inactiveButtonClass);
 });
 
 //close Image modal
@@ -171,28 +170,8 @@ closeImageModal.addEventListener('click', () => {
   toggleModal(imageModal);
 });
 
-// function createCard (data) {
-//   const elementContent = element.cloneNode(true);
-//   const elementImage = elementContent.querySelector('.element__image');
-//   const elementLike = elementContent.querySelector('.element__like');
-//   const elementTitle = elementContent.querySelector('.element__name');
-//   const elementDelete = elementContent.querySelector('.element__delete');
 
-//   elementImage.addEventListener('click', () => {
-//     imgFigure.src = `${data.link}`;
-//     captionFigure.alt = `${data.name}`;
-//     captionFigure.textContent = `${data.name}`;
-//     toggleModal(imageModal);
-//   });
-
-//   elementLike.addEventListener('click', (e) => {
-//     e.target.classList.toggle('element__like_active');
-//   });
-//   elementDelete.addEventListener('click', () => {
-//     elementContent.remove();
-//   });
-
-//   elementTitle.textContent = data.name;
-//   elementImage.style.backgroundImage = `url(${data.link})`;
-//   return elementContent;
-// }
+// const makeSubmitButtonDisabled = (button, inactiveButtonClass) => {
+//   button.classList.add(inactiveButtonClass);
+//   button.setAttribute('disabled', true);
+// };
