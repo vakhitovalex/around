@@ -1,6 +1,6 @@
 import FormValidator from './FormValidator.js';
 import Card from './Card.js';
-import disableButton from './FormValidator.js';
+import {imageModal, toggleModal} from './utils.js';
 
 const settings  = {
   formSelector: ".form",
@@ -13,7 +13,6 @@ const settings  = {
 //modals
 const editProfileModal = document.querySelector('.modal_type_edit-profile');
 const newPlaceModal = document.querySelector('.modal_type_add-place');
-const imageModal = document.querySelector('.modal_type_image');
 const submitNewPlace = newPlaceModal.querySelector(".form__submit");
 
 const profileSubmitForm = editProfileModal.querySelector('.form');
@@ -22,14 +21,8 @@ const addNewPlaceSubmitForm = newPlaceModal.querySelector('.form');
 const editProfileModalValidator = new FormValidator(settings, profileSubmitForm);
 const newPlaceModalValidator = new FormValidator(settings, addNewPlaceSubmitForm);
 
-
 editProfileModalValidator.enableValidation();
 newPlaceModalValidator.enableValidation();
-
-
-//modals
-// const editProfileModal = document.querySelector('.modal_type_edit-profile');
-// const newPlaceModal = document.querySelector('.modal_type_add-place');
 
 //open modal buttons
 const profileEditButton = document.querySelector('.profile__edit');
@@ -52,12 +45,7 @@ const addNewPlaceImageForm = newPlaceModal.querySelector('.form__input_type_plac
 
 //template variables
 const element = document.querySelector('.element-template').content.querySelector('.element');
-// const elementLike = elementContent.querySelector('.element__like');
 const elements = document.querySelector('.elements');
-
-//show place modal variables
-const imgFigure = imageModal.querySelector('.modal__img');
-const captionFigure = imageModal.querySelector('.modal__imgname');
 
 const initialCards = [
   {
@@ -96,33 +84,6 @@ initialCards.forEach((item) => {
   addCard(item);
 });
 
-//click outside of modal window handler
-function closeByClick (evt) {
-  if (evt.target.classList.contains('modal_open')) {
-    const modal = document.querySelector('.modal_open');
-    toggleModal(modal);
-  }
-}
-//escape button handler
-function closeByEsc (evt) {
-  if (evt.key === 'Escape') {
-    const modal = document.querySelector('.modal_open');
-    toggleModal(modal);
-  }
-}
-
-function toggleModal (modal) {
-  if (!modal.classList.contains('modal_open')) {
-      document.addEventListener('keydown', closeByEsc);
-      modal.addEventListener('click', closeByClick);
-    }
-    else {
-      document.removeEventListener('keydown', closeByEsc);
-      modal.removeEventListener('click', closeByClick);
-    }
-  modal.classList.toggle('modal_open');
-}
-
 //submit profile edit form
 function profileFormSubmit (e) {
   e.preventDefault ();
@@ -155,14 +116,12 @@ addNewPlaceSubmitForm.addEventListener('submit', (e) => {
   addCard({name: addNewPlaceTitleForm.value, link:addNewPlaceImageForm.value});
   addNewPlaceSubmitForm.reset();
   toggleModal(newPlaceModal);
-  new disableButton(submitNewPlace, settings.inactiveButtonClass);
 });
 
 //close Add new place modal
 closeNewPlaceModal.addEventListener('click', () => {
   addNewPlaceSubmitForm.reset();
   toggleModal(newPlaceModal);
-  new disableButton(submitNewPlace, settings.inactiveButtonClass);
 });
 
 //close Image modal
@@ -170,8 +129,3 @@ closeImageModal.addEventListener('click', () => {
   toggleModal(imageModal);
 });
 
-
-// const makeSubmitButtonDisabled = (button, inactiveButtonClass) => {
-//   button.classList.add(inactiveButtonClass);
-//   button.setAttribute('disabled', true);
-// };

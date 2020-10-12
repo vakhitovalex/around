@@ -1,34 +1,4 @@
-//show place modal variables
-const imageModal = document.querySelector('.modal_type_image');
-const imgFigure = imageModal.querySelector('.modal__img');
-const captionFigure = imageModal.querySelector('.modal__imgname');
-// const closeImageModal = imageModal.querySelector('.modal__close-button');
-
-
-function toggleModal (modal) {
-  if (!modal.classList.contains('modal_open')) {
-      document.addEventListener('keydown', closeByEsc);
-      modal.addEventListener('click', closeByClick);
-    }
-    else {
-      document.removeEventListener('keydown', closeByEsc);
-      modal.removeEventListener('click', closeByClick);
-    }
-  modal.classList.toggle('modal_open');
-}
-function closeByClick (evt) {
-  if (evt.target.classList.contains('modal_open')) {
-    const modal = document.querySelector('.modal_open');
-    toggleModal(modal);
-  }
-}
-//escape button handler
-function closeByEsc (evt) {
-  if (evt.key === 'Escape') {
-    const modal = document.querySelector('.modal_open');
-    toggleModal(modal);
-  }
-}
+import {imageModal, imgFigure, captionFigure, toggleModal, closeByClick, closeByEsc} from './utils.js';
 
 class Card {
   constructor (data, cardSelector) {
@@ -52,6 +22,7 @@ class Card {
 
   _deleteButtonHandler () {
     this._elementContent.remove();
+    this._elementContent = '';
   }
 
   _pictureModalHandler () {
