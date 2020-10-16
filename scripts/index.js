@@ -74,11 +74,11 @@ const initialCards = [
   }
 ];
 
-const addCard = (data) => {
-  const card = new Card (data, ".element-template");
+function addCard (item) {
+  const card = new Card (item, ".element-template");
   const cardElement = card.getCard();
   elements.append(cardElement);
-};
+}
 
 initialCards.forEach((item) => {
   addCard(item);
