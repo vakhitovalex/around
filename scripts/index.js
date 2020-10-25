@@ -82,16 +82,6 @@ const initialCards = [
 ];
 
 
-// function addCard (item) {
-//   const card = new Card (item, ".element-template");
-//   const cardElement = card.getCard();
-//   elements.append(cardElement);
-// }
-
-// initialCards.forEach((item) => {
-//   addCard(item);
-// });
-
 
 const editProfileModal = new PopupWithForm ({
   popupSelector: '.modal_type_edit-profile',
@@ -180,3 +170,15 @@ initialElements.renderElements();
 //   toggleModal(imageModal);
 // });
 
+
+
+
+// function addCard (item) {
+//   const card = new Card (item, ".element-template");
+//   const cardElement = card.getCard();
+//   elements.append(cardElement);
+// }
+
+// initialCards.forEach((item) => {
+//   addCard(item);
+// });
