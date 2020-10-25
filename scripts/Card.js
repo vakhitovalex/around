@@ -1,9 +1,12 @@
-import {imageModal, imgFigure, captionFigure, toggleModal, closeByClick, closeByEsc} from './utils.js';
+// import {imageModal, imgFigure, captionFigure, toggleModal, closeByClick, closeByEsc} from './utils.js';
+
+
 
 class Card {
-  constructor (data, cardSelector) {
+  constructor ({data, handleCardClick}, cardSelector) {
   this._name = data.name;
   this._link = data.link;
+  this._handleCardClick = handleCardClick;
   this._cardSelector = cardSelector;
   }
 
@@ -25,22 +28,29 @@ class Card {
     this._elementContent = '';
   }
 
-  _pictureModalHandler () {
-    imgFigure.src = this._link;
-    captionFigure.alt = this._name;
-    captionFigure.textContent = this._name;
-    toggleModal(imageModal);
-  }
+  // _pictureModalHandler () {
+  //   imgFigure.src = this._link;
+  //   captionFigure.alt = this._name;
+  //   captionFigure.textContent = this._name;
+  //   toggleModal(imageModal);
+  // }
+
+  // _handleCardClick () {
+  //   captionFigure.alt = this._name;
+  //   captionFigure.textContent = this._name;
+  //   imgFigure.src = this._link;
+  //   this._elementContent.classList.add("modal_open");
+  // }
 
   _setEventListeners () {
     this._elementContents.elementLike.addEventListener('click', this._likeButtonHandler);
     this._elementContents.elementDelete.addEventListener('click', () => {
-    this._deleteButtonHandler();
+      this._deleteButtonHandler();
     });
-    this._elementContents.elementImage.addEventListener('click', () => {
-      this._pictureModalHandler();
-    });
+    this._elementContents.elementImage.addEventListener('click', () => this._handleCardClick(this._name, this._link));
   }
+
+
 
   getCard () {
     this._elementContent = this._getTemplate();
