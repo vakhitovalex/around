@@ -86,12 +86,16 @@ const initialCards = [
 const editProfileModal = new PopupWithForm ({
   popupSelector: '.modal_type_edit-profile',
   handleFormSubmit: (formData) => {
-    const user = new UserInfo(formData);
-    user.setUserInfo(formData);
+    const user = new UserInfo({
+      name: document.querySelector('.profile__name').textContent,
+      job: document.querySelector('.profile__about').textContent
+    });
+    user.setUserInfo({name: formData.name, job: formData.job});
   }
 });
 
 editProfileModal.setEventListeners();
+
 profileEditButton.addEventListener('click', () => {
   editProfileModal.open();
 });

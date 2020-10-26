@@ -1,17 +1,17 @@
 class UserInfo {
-  constructor (data) {
-    this._name = data.name;
-    this._job = data.job;
+  constructor (name, job) {
+    this.name = document.querySelector(name).textContent;
+    this.job = document.querySelector(job).textContent;
   }
 
   getUserInfo() {
-    const user = document.querySelector('profile__info').cloneNode(true);
-    return user;
+    userInfo = {name: this.name, job: this.job};
+    return userInfo;
   }
 
   setUserInfo(formData) {
-    this._name.textContent = formData.name;
-    this._job.textContnet = formData.job;
+    this.name = formData.name.value;
+    this.job = formData.job.value;
   }
 }
 

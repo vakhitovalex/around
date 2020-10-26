@@ -25,13 +25,14 @@ class PopupWithForm extends Popup {
     // this._popupElement.querySelector('.modal__close-button').addEventListener('click', () => {
     //   this._popupElement.close();
     // });
-    super.setEventListeners();
+
 
     this._popupElement.querySelector('.form__submit').addEventListener('submit', (e) => {
       e.preventDefault();
       this._handleFormSubmit(this._getInputValues());
-      // this._popupElement.reset();
+      this._popupElement.reset();
     });
+    super.setEventListeners();
   }
 }
 
