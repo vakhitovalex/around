@@ -41,9 +41,9 @@
           <button type="button" class="modal__close-button"></button>
           <h3 class="modal__title">Edit profile</h3>
           <form action="" class="form"  novalidate>
-              <input id="profile-name" type="text" class="form__input form__input_type_profile-name" value= "" placeholder="Name" required minlength="2" maxlength="40">
+              <input id="profile-name" type="text" class="form__input form__input_type_profile-name" value= "" placeholder="Name" required minlength="2" maxlength="40" name="profileName">
               <span id="profile-name-error" class="form__error"></span>
-              <input id="profile-info" type="text" class="form__input form__input_type_profile-description" value="" placeholder="Description" required minlength="2" maxlength="200">
+              <input id="profile-info" type="text" class="form__input form__input_type_profile-description" value="" placeholder="Description" required minlength="2" maxlength="200" name="profileAbout">
               <span id="profile-info-error" class="form__error"></span>
               <button class="form__submit" type="submit">Save</button>
           </form>

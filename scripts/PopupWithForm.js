@@ -12,11 +12,18 @@ class PopupWithForm extends Popup {
     this._inputList.forEach((input) => {
       this._formValues[input.name] = input.value;
     });
+    console.log(this._formValues);
     return this._formValues;
   }
 
 
   setEventListeners() {
+    this._popupElement.addEventListener('submit', (e) => {
+      e.preventDefault();
+      this._handleFormSubmit(this._getInputValues());
+    });
+    super.setEventListeners();
+      // this._popupElement.reset();
     // this._popupElement.addEventListener('click', (e) => {
     //   if (e.target.classList.contains('modal_open')) {
     //     this.close();
@@ -25,14 +32,14 @@ class PopupWithForm extends Popup {
     // this._popupElement.querySelector('.modal__close-button').addEventListener('click', () => {
     //   this._popupElement.close();
     // });
+  }
 
-
-    this._popupElement.querySelector('.form__submit').addEventListener('submit', (e) => {
-      e.preventDefault();
-      this._handleFormSubmit(this._getInputValues());
-      this._popupElement.reset();
-    });
-    super.setEventListeners();
+  open (name, job) {
+    if (this._popupElement.classList.contains('modal_type_edit-profile')) {
+      this._popupElement.querySelector('.form__input_type_profile-name').value = name;
+      this._popupElement.querySelector('.form__input_type_profile-description').value = job;
+    }
+    super.open();
   }
 }
 
