@@ -1,18 +1,16 @@
 import {settings, initialCards, cardListSelector, profileSubmitForm, addNewPlaceSubmitForm, profileEditButton, addNewPlaceButton} from '../utils/constants.js';
 
-import FormValidator from './FormValidator.js';
-import Card from './Card.js';
-import PopupWithForm from './PopupWithForm.js';
-import PopupWithImage from './PopupWithImage.js';
-import Section from './Section.js';
-import UserInfo from './UserInfo.js';
+import FormValidator from '../components/FormValidator.js';
+import Card from '../components/Card.js';
+import PopupWithForm from '../components/PopupWithForm.js';
+import PopupWithImage from '../components/PopupWithImage.js';
+import Section from '../components/Section.js';
+import UserInfo from '../components/UserInfo.js';
 
 const currentUser = new UserInfo();
-console.log(currentUser);
 const profileEdit = new PopupWithForm ({
   popupSelector: '.modal_type_edit-profile',
   handleFormSubmit: (formInputs) => {
-    console.log(currentUser);
     currentUser.setUserInfo(formInputs.profileName, formInputs.profileAbout);
     profileEdit.close();
   }
@@ -41,6 +39,7 @@ const addNewCard = new PopupWithForm ({
 });
 
 addNewCard.setEventListeners();
+
 addNewPlaceButton.addEventListener('click', () => {
   addNewCard.open();
 });

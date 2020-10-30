@@ -9,7 +9,6 @@ class UserInfo {
   }
 
   setUserInfo(name, job) {
-    console.log(name, job);
     this._nameValue.textContent = name;
     this._jobValue.textContent = job;
   }

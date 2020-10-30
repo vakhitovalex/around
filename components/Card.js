@@ -1,7 +1,3 @@
-// import {imageModal, imgFigure, captionFigure, toggleModal, closeByClick, closeByEsc} from './utils.js';
-
-
-
 class Card {
   constructor ({data, handleCardClick}, cardSelector) {
   this._name = data.name;
@@ -27,20 +23,6 @@ class Card {
     this._elementContent.remove();
     this._elementContent = '';
   }
-
-  // _pictureModalHandler () {
-  //   imgFigure.src = this._link;
-  //   captionFigure.alt = this._name;
-  //   captionFigure.textContent = this._name;
-  //   toggleModal(imageModal);
-  // }
-
-  // _handleCardClick () {
-  //   captionFigure.alt = this._name;
-  //   captionFigure.textContent = this._name;
-  //   imgFigure.src = this._link;
-  //   this._elementContent.classList.add("modal_open");
-  // }
 
   _setEventListeners () {
     this._elementContents.elementLike.addEventListener('click', this._likeButtonHandler);

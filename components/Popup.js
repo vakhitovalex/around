@@ -1,5 +1,3 @@
-// const popupElement = document.querySelector('.modal');
-// const popupCloseButton = document.querySelector('modal__close-button');
 class Popup {
   constructor (popupSelector) {
     this._popupElement = document.querySelector(popupSelector);
@@ -18,7 +16,6 @@ class Popup {
 
   _handleEscClose(e) {
     if (e.key === 'Escape') {
-      console.log(e.key);
       this.close();
     }
   }
@@ -27,7 +24,6 @@ class Popup {
     this._popupElement.addEventListener('click', (e) => {
       if (e.target.classList.contains('modal_open') ||
        e.target.classList.contains('modal__close-button')) {
-        console.log(e.target);
         this.close();
       }
     });
