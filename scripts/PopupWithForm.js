@@ -23,15 +23,6 @@ class PopupWithForm extends Popup {
       this._handleFormSubmit(this._getInputValues());
     });
     super.setEventListeners();
-      // this._popupElement.reset();
-    // this._popupElement.addEventListener('click', (e) => {
-    //   if (e.target.classList.contains('modal_open')) {
-    //     this.close();
-    //   }
-    // });
-    // this._popupElement.querySelector('.modal__close-button').addEventListener('click', () => {
-    //   this._popupElement.close();
-    // });
   }
 
   open (name, job) {
@@ -40,6 +31,11 @@ class PopupWithForm extends Popup {
       this._popupElement.querySelector('.form__input_type_profile-description').value = job;
     }
     super.open();
+  }
+
+  close() {
+    super.close();
+    this._popupElement.querySelector('.form').reset();
   }
 }
 
