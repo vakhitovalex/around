@@ -1,69 +1,11 @@
+import {settings, initialCards, cardListSelector, profileSubmitForm, addNewPlaceSubmitForm, profileEditButton, addNewPlaceButton} from '../utils/constants.js';
+
 import FormValidator from './FormValidator.js';
 import Card from './Card.js';
-// import {imageModal, toggleModal} from './utils.js';
 import PopupWithForm from './PopupWithForm.js';
 import PopupWithImage from './PopupWithImage.js';
 import Section from './Section.js';
 import UserInfo from './UserInfo.js';
-
-const cardListSelector = '.elements';
-
-const settings  = {
-  formSelector: ".form",
-  inputSelector: ".form__input",
-  submitButtonSelector: ".form__submit",
-  inactiveButtonClass: "form__submit_inactive",
-  inputErrorClass: "form__error",
-  errorClass: "form__error_active"
-};
-
-// //open modal buttons
-const profileEditButton = document.querySelector('.profile__edit');
-const addNewPlaceButton = document.querySelector('.profile__add');
-
-// //profile
-const profileName = document.querySelector('.profile__name');
-const profileAbout = document.querySelector('.profile__about');
-// //profile form inputs
-
-const profileNameForm = document.querySelector('.form__input_type_profile-name');
-const profileAboutForm = document.querySelector('.form__input_type_profile-description');
-// //add new place form inputs
-
-// const addNewPlaceTitleForm = newPlaceModal.querySelector('.form__input_type_place-title');
-// const addNewPlaceImageForm = newPlaceModal.querySelector('.form__input_type_place-link');
-
-// //template variables
-// const element = document.querySelector('.element-template').content.querySelector('.element');
-// const elements = document.querySelector('.elements');
-
-const initialCards = [
-  {
-    name: 'Yosemite Valley',
-    link: './images/yosemite.jpg'
-  },
-  {
-    name: 'Lake Tahoe',
-    link: './images/tahoe.jpg',
-  },
-  {
-    name: 'Sequoia National Park',
-    link: './images/sequoia.jpg'
-  },
-  {
-    name: 'Antilope Canyon',
-    link: './images/antilope.jpg'
-  },
-  {
-    name: 'Niagara Falls',
-    link: './images/niagara.jpg'
-  },
-  {
-    name: 'Monument Valley',
-    link: './images/monument.jpg'
-  }
-];
-
 
 const currentUser = new UserInfo();
 console.log(currentUser);
@@ -75,7 +17,9 @@ const profileEdit = new PopupWithForm ({
     profileEdit.close();
   }
 });
+
 profileEdit.setEventListeners();
+
 profileEditButton.addEventListener('click', () => {
   const userValues = currentUser.getUserInfo();
   profileEdit.open(userValues.name, userValues.job);
@@ -119,12 +63,6 @@ const initialElements = new Section (
 }, cardListSelector);
 initialElements.renderElements();
 
-
-const editProfileModal = document.querySelector('.modal_type_edit-profile');
-const newPlaceModal = document.querySelector('.modal_type_add-place');
-
-const profileSubmitForm = editProfileModal.querySelector('.form');
-const addNewPlaceSubmitForm = newPlaceModal.querySelector('.form');
 
 const editProfileModalValidator = new FormValidator(settings, profileSubmitForm);
 const newPlaceModalValidator = new FormValidator(settings, addNewPlaceSubmitForm);
