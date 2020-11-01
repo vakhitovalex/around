@@ -1,12 +1,11 @@
+import './index.css';
 import {settings, initialCards, cardListSelector, profileSubmitForm, addNewPlaceSubmitForm, profileEditButton, addNewPlaceButton} from '../utils/constants.js';
-
 import FormValidator from '../components/FormValidator.js';
 import Card from '../components/Card.js';
 import PopupWithForm from '../components/PopupWithForm.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import Section from '../components/Section.js';
 import UserInfo from '../components/UserInfo.js';
-
 const currentUser = new UserInfo();
 const profileEdit = new PopupWithForm ({
   popupSelector: '.modal_type_edit-profile',
