@@ -45,3 +45,6 @@ export const addNewPlaceSubmitForm = newPlaceModal.querySelector('.form');
 
 export const profileEditButton = document.querySelector('.profile__edit');
 export const addNewPlaceButton = document.querySelector('.profile__add');
+
+export const userProfileNameForm = editProfileModal.querySelector('.form__input_type_profile-name');
+export const userProfileAboutForm = editProfileModal.querySelector('.form__input_type_profile-description');

@@ -24,11 +24,7 @@ class PopupWithForm extends Popup {
     super.setEventListeners();
   }
 
-  open (name, job) {
-    if (this._popupElement.classList.contains('modal_type_edit-profile')) {
-      this._popupElement.querySelector('.form__input_type_profile-name').value = name;
-      this._popupElement.querySelector('.form__input_type_profile-description').value = job;
-    }
+  open () {
     super.open();
   }
 

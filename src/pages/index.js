@@ -1,5 +1,5 @@
 import './index.css';
-import {settings, initialCards, cardListSelector, profileSubmitForm, addNewPlaceSubmitForm, profileEditButton, addNewPlaceButton} from '../utils/constants.js';
+import {settings, initialCards, cardListSelector, profileSubmitForm, addNewPlaceSubmitForm, profileEditButton, addNewPlaceButton, userProfileNameForm, userProfileAboutForm} from '../utils/constants.js';
 import FormValidator from '../components/FormValidator.js';
 import Card from '../components/Card.js';
 import PopupWithForm from '../components/PopupWithForm.js';
@@ -19,20 +19,26 @@ profileEdit.setEventListeners();
 
 profileEditButton.addEventListener('click', () => {
   const userValues = currentUser.getUserInfo();
-  profileEdit.open(userValues.name, userValues.job);
+  profileEdit.open();
+  userProfileNameForm.value = userValues.name;
+  userProfileAboutForm.value = userValues.job;
 });
 
-const addNewCard = new PopupWithForm ({
-  popupSelector: '.modal_type_add-place',
-  handleFormSubmit: (formInputs) => {
-    const card = new Card ({
-      data: {name: formInputs.placeTitle, link: formInputs.placeLink},
+function createCard (cardData) {
+  const card = new Card ({
+      data: cardData,
       handleCardClick: (name, link) => {
         photoModal.open(name, link);
       }
     }, '.element-template');
     const cardElement = card.getCard();
     initialElements.addItem(cardElement);
+}
+
+const addNewCard = new PopupWithForm ({
+  popupSelector: '.modal_type_add-place',
+  handleFormSubmit: (formInputs) => {
+    createCard({name: formInputs.placeTitle, link: formInputs.placeLink});
     addNewCard.close();
   }
 });
@@ -49,14 +55,7 @@ const initialElements = new Section (
   {
   items: initialCards,
   renderer: (item) => {
-    const card = new Card ({
-      data: item,
-      handleCardClick: (name, link) => {
-        photoModal.open(name, link);
-      }
-    }, '.element-template');
-    const cardElement = card.getCard();
-    initialElements.addItem(cardElement);
+    createCard(item);
   }
 }, cardListSelector);
 initialElements.renderElements();
