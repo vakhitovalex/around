@@ -40,8 +40,8 @@ const profileEdit = new PopupWithForm({
   popupSelector: ".modal_type_edit-profile",
   handleFormSubmit: (formInputs) => {
     api.updateUserInfo({name: formInputs.profileName, about: formInputs.profileAbout})
-    .then(res => {
-      currentUser.setUserInfo(res.name,res.about);
+    .then((res) => {
+    currentUser.setUserInfo(res.name,res.about);
     })
     profileEdit.close();
   },

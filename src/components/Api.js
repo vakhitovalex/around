@@ -25,7 +25,7 @@ class Api {
   }
 
   //PATCH https://around.nomoreparties.co/v1/groupId/users/me
-  updateUserInfo() {
+  updateUserInfo({name, about}) {
     return fetch(this._baseUrl + '/users/me', {
       headers: this._headers,
       method: "PATCH",
