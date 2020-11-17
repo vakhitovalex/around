@@ -20,9 +20,24 @@ class Api {
     })
       .then((res) =>
         res.ok ? res.json() : Promise.reject(`Error: ${res.status}`)
+
       )
       .catch((err) => console.log(err));
   }
+
+  //PUT https://around.nomoreparties.co/v1/groupId/cards/likes/cardId
+  //DELETE https://around.nomoreparties.co/v1/groupId/cards/likes/cardId
+  changeLikeCardStatus(cardId, like) {
+    return fetch(this._baseUrl + '/cards/' + cardId,  {
+      headers: this._headers,
+      method: "PUT",
+    })
+      .then((res) =>
+        res.ok ? res.json() : Promise.reject(`Error: ${res.status}`)
+      )
+      .catch((err) => console.log(err));
+  }
+
 
   //PATCH https://around.nomoreparties.co/v1/groupId/users/me
   updateUserInfo({name, about}) {

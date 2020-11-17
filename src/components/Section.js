@@ -9,6 +9,10 @@ export default class Section {
     this._container.prepend(element);
   }
 
+  // removeItem(element) {
+  //   this._container.remove(element);
+  // }
+
   renderElements () {
     this._elements.forEach((item) => {
       this._renderer(item);

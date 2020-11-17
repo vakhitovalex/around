@@ -14,6 +14,7 @@ import FormValidator from "../components/FormValidator.js";
 import Card from "../components/Card.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import PopupWithImage from "../components/PopupWithImage.js";
+import PopupWithSubmit from "../components/PopupWithSubmit.js"
 import Section from "../components/Section.js";
 import UserInfo from "../components/UserInfo.js";
 import Api from "../components/Api.js";
@@ -26,14 +27,15 @@ const api = new Api({
   },
 });
 
+
 const currentUser = new UserInfo();
 api.getUserInfo()
 .then(res => {
-  console.log('profile', res);
-  // api.updateUserInfo(res.name, res.about)
-  // .then(res => console.log(res));
   currentUser.setUserInfo(res.name,res.about);
+  const currentUserId = res._id;
+  console.log("my id is - " + currentUserId);
 });
+
 
 
 const profileEdit = new PopupWithForm({
@@ -57,60 +59,94 @@ profileEditButton.addEventListener("click", () => {
 });
 
 
-api.getInitialCards()
-.then((res) => {
-  console.log(res)
-  const initialElements = new Section(
-    {
-      items: res,
-      renderer: (cardData) => {
-        const card = new Card(
-          {
-            data: cardData,
-            handleCardClick: (name, link) => {
-              photoModal.open(name, link);
+
+api.getUserInfo()
+.then(res => {
+  const currentUserId = res._id;
+  api.getInitialCards()
+    .then((res) => {
+    console.log(res);
+    // console.log(currentUserId + " !!!")
+    const initialElements = new Section(
+      {
+        items: res,
+        renderer: (cardData) => {
+          const card = new Card(
+            {
+              data: cardData,
+              currentUserId: currentUserId,
+              handleCardClick: (name, link) => {
+                photoModal.open(name, link);
+              },
+              handleDeleteClick: (cardData) => {
+                // console.log("clicked bin of this card - " + cardId);
+                const deleteCardModal = new PopupWithSubmit({
+                  popupSelector: ".modal_type_delete-place",
+                  handleDeleteSubmit: () => {
+                    api.deleteCard(cardData._id).then(() => {
+                      card.removeCard();
+                      deleteCardModal.close();
+                    });
+                    console.log(cardData._id + " was deleted");
+                  }
+                });
+                deleteCardModal.setEventListeners();
+                deleteCardModal.open();
+
+              },
             },
-            handleDeleteClick: (cardId) => {
-              api.deleteCard(cardId);
-            }
-          },
-          ".element-template"
-        );
-        const cardElement = card.getCard();
-        initialElements.addItem(cardElement);
-      },
-    },
-    cardListSelector
-  );
-  initialElements.renderElements();
-
-  const addNewCard = new PopupWithForm({
-    popupSelector: ".modal_type_add-place",
-    handleFormSubmit: (formInputs) => {
-      api.addNewCard({ name: formInputs.placeTitle, link: formInputs.placeLink })
-      .then(res => {
-        const card = new Card(
-        {
-          data: ({ name: formInputs.placeTitle, link: formInputs.placeLink }),
-          handleCardClick: (name, link) => {
-            photoModal.open(name, link);
-          },
+            ".element-template"
+          );
+          const cardElement = card.getCard(cardData.owner._id, currentUserId);
+          initialElements.addItem(cardElement);
         },
-        ".element-template"
-      );
-      const cardElement = card.getCard();
-      initialElements.addItem(cardElement);
-      // createCard({name: formInputs.placeTitle, link: formInputs.placeLink});
-      addNewCard.close();
-      });
-    }
-  });
-  addNewCard.setEventListeners();
+      },
+      cardListSelector
+    );
+    initialElements.renderElements();
 
-  addNewPlaceButton.addEventListener("click", () => {
-    addNewCard.open();
-  });
+    const addNewCard = new PopupWithForm({
+      popupSelector: ".modal_type_add-place",
+      handleFormSubmit: (formInputs) => {
+        api.addNewCard({ name: formInputs.placeTitle, link: formInputs.placeLink })
+        .then((res) => {
+          const card = new Card(
+            {
+              data: res,
+              currentUserId: currentUserId,
+              handleCardClick: (name, link) => {
+                photoModal.open(name, link);
+              },
+              handleDeleteClick: (cardData) => {
+                // console.log("clicked bin of this card - " + cardId);
+                const deleteCardModal = new PopupWithSubmit({
+                  popupSelector: ".modal_type_delete-place",
+                  handleDeleteSubmit: () => {
+                    api.deleteCard(cardData._id).then(() => {
+                      card.removeCard();
+                      deleteCardModal.close();
+                    });
+                    console.log(cardData._id + " was deleted");
+                  }
+                });
+                deleteCardModal.setEventListeners();
+                deleteCardModal.open();
+              },
+            },
+            ".element-template"
+          );
+          const cardElement = card.getCard(res.owner._id, currentUserId);
+          initialElements.addItem(cardElement);
+          addNewCard.close();
+        });
+      }
+    });
+    addNewCard.setEventListeners();
 
+    addNewPlaceButton.addEventListener("click", () => {
+      addNewCard.open();
+    });
+  });
 });
 
 
@@ -163,3 +199,25 @@ const newPlaceModalValidator = new FormValidator(
 
 editProfileModalValidator.enableValidation();
 newPlaceModalValidator.enableValidation();
+
+
+// function isOwner (cardOwnerId, currentUserId) {
+//   api.getUserInfo()
+//   .then(res => {
+//     const currentUserId = res._id;
+//     console.log('my id is: '+ currentUserId);
+//     return currentUserId;
+//   });
+//   api.getInitialCards()
+//   .then((res) => {
+//     res.forEach((cardItem) => {
+//       const cardOwnerId = cardItem.owner._id;
+//       console.log('userid of this card is ' + cardOwnerId);
+//       if (cardOwnerId == currentUserId) {
+//         console.log('equal');
+//       }
+//     });
+//   });
+
+
+// }
