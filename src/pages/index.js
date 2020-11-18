@@ -94,10 +94,16 @@ api.getUserInfo()
                 deleteCardModal.open();
 
               },
+              handleLikeClick: (cardData) => {
+                card.like();
+                console.log(cardData);
+                api.changeLikeStatus(cardData._id, card.isLiked)
+                .then((res) => console.log(res));
+              }
             },
             ".element-template"
           );
-          const cardElement = card.getCard(cardData.owner._id, currentUserId);
+          const cardElement = card.getCard(cardData.owner._id, currentUserId, cardData.likes);
           initialElements.addItem(cardElement);
         },
       },
