@@ -39,12 +39,16 @@ export const cardListSelector = '.elements';
 
 const editProfileModal = document.querySelector('.modal_type_edit-profile');
 const newPlaceModal = document.querySelector('.modal_type_add-place');
+const editProfilePictureModal = document.querySelector('.modal_type_edit-profile-picture');
 
 export const profileSubmitForm = editProfileModal.querySelector('.form');
+export const profilePictureSubmitForm = editProfilePictureModal.querySelector('.form');
 export const addNewPlaceSubmitForm = newPlaceModal.querySelector('.form');
 
 export const profileEditButton = document.querySelector('.profile__edit');
+export const profilePictureEditButton = document.querySelector('.profile__picture-edit');
 export const addNewPlaceButton = document.querySelector('.profile__add');
 
 export const userProfileNameForm = editProfileModal.querySelector('.form__input_type_profile-name');
 export const userProfileAboutForm = editProfileModal.querySelector('.form__input_type_profile-description');
+

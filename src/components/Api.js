@@ -68,7 +68,7 @@ class Api {
 
   //PATCH https://around.nomoreparties.co/v1/groupId/users/me/avatar
   updateUserPicture(avatar) {
-    return fetch(this._baseUrl + '/users/me', {
+    return fetch(this._baseUrl + '/users/me/avatar', {
       headers: this._headers,
       method: "PATCH",
       body: JSON.stringify({

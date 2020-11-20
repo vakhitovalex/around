@@ -4,12 +4,15 @@ import {
   initialCards,
   cardListSelector,
   profileSubmitForm,
+  profilePictureSubmitForm,
   addNewPlaceSubmitForm,
   profileEditButton,
+  profilePictureEditButton,
   addNewPlaceButton,
   userProfileNameForm,
   userProfileAboutForm,
 } from "../utils/constants.js";
+
 import FormValidator from "../components/FormValidator.js";
 import Card from "../components/Card.js";
 import PopupWithForm from "../components/PopupWithForm.js";
@@ -31,7 +34,7 @@ const api = new Api({
 const currentUser = new UserInfo();
 api.getUserInfo()
 .then(res => {
-  currentUser.setUserInfo(res.name,res.about);
+  currentUser.setUserInfo(res.name,res.about,res.avatar);
   const currentUserId = res._id;
   console.log("my id is - " + currentUserId);
 });
@@ -43,19 +46,39 @@ const profileEdit = new PopupWithForm({
   handleFormSubmit: (formInputs) => {
     api.updateUserInfo({name: formInputs.profileName, about: formInputs.profileAbout})
     .then((res) => {
-    currentUser.setUserInfo(res.name,res.about);
-    })
+    currentUser.setUserInfo(res.name,res.about, res.avatar);
+    });
     profileEdit.close();
   },
 });
 
 profileEdit.setEventListeners();
 
-profileEditButton.addEventListener("click", () => {
+profileEditButton.addEventListener('click', () => {
   const userValues = currentUser.getUserInfo();
   profileEdit.open();
   userProfileNameForm.value = userValues.name;
   userProfileAboutForm.value = userValues.job;
+});
+
+const profilePictureEdit = new PopupWithForm ({
+  popupSelector: '.modal_type_edit-profile-picture',
+  handleFormSubmit: (formInputs) => {
+    api.updateUserPicture(formInputs.pictureLink)
+    .then((res) => {
+      currentUser.setProfilePicture(res.avatar);
+      profilePictureEdit.close();
+    })
+    .catch((err) => {
+      console.log(err);
+      profilePictureEdit.close();
+    });
+  }
+});
+profilePictureEdit.setEventListeners();
+
+profilePictureEditButton.addEventListener('click', () => {
+  profilePictureEdit.open();
 });
 
 
@@ -209,27 +232,12 @@ const newPlaceModalValidator = new FormValidator(
   addNewPlaceSubmitForm
 );
 
+const editProfilePictureModalValidator = new FormValidator(
+  settings,
+  profilePictureSubmitForm
+);
+
+
+editProfilePictureModalValidator.enableValidation();
 editProfileModalValidator.enableValidation();
 newPlaceModalValidator.enableValidation();
-
-
-// function isOwner (cardOwnerId, currentUserId) {
-//   api.getUserInfo()
-//   .then(res => {
-//     const currentUserId = res._id;
-//     console.log('my id is: '+ currentUserId);
-//     return currentUserId;
-//   });
-//   api.getInitialCards()
-//   .then((res) => {
-//     res.forEach((cardItem) => {
-//       const cardOwnerId = cardItem.owner._id;
-//       console.log('userid of this card is ' + cardOwnerId);
-//       if (cardOwnerId == currentUserId) {
-//         console.log('equal');
-//       }
-//     });
-//   });
-
-
-// }
