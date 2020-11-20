@@ -95,10 +95,16 @@ api.getUserInfo()
 
               },
               handleLikeClick: (cardData) => {
-                card.like();
-                console.log(cardData);
-                api.changeLikeStatus(cardData._id, card.isLiked)
-                .then((res) => console.log(res));
+
+                // console.log(cardData.isLiked);
+                api.changeLikeStatus(cardData._id, cardData.isLiked)
+                .then(likesData => {
+                  console.log(likesData)
+                  card.setLikesNumber(likesData.likes.length, cardData.isLiked);
+                  card.like();
+                }
+                  );
+
               }
             },
             ".element-template"

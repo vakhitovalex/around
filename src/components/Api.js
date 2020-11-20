@@ -27,8 +27,8 @@ class Api {
 
   //PUT https://around.nomoreparties.co/v1/groupId/cards/likes/cardId
   //DELETE https://around.nomoreparties.co/v1/groupId/cards/likes/cardId
-  changeLikeStatus(cardId, like) {
-    if (like) {
+  changeLikeStatus(cardId, isLiked) {
+    if (isLiked) {
       return fetch(this._baseUrl + '/cards/likes/' + cardId,  {
         headers: this._headers,
         method: "PUT",
@@ -58,6 +58,21 @@ class Api {
       body: JSON.stringify({
         name,
         about
+      })
+    })
+      .then((res) =>
+        res.ok ? res.json() : Promise.reject(`Error: ${res.status}`)
+      )
+      .catch((err) => console.log(err));
+  }
+
+  //PATCH https://around.nomoreparties.co/v1/groupId/users/me/avatar
+  updateUserPicture(avatar) {
+    return fetch(this._baseUrl + '/users/me', {
+      headers: this._headers,
+      method: "PATCH",
+      body: JSON.stringify({
+        avatar
       })
     })
       .then((res) =>
