@@ -2,6 +2,9 @@ import "./index.css";
 import {
   settings,
   initialCards,
+  editProfileModal,
+  newPlaceModal,
+  editProfilePictureModal,
   cardListSelector,
   profileSubmitForm,
   profilePictureSubmitForm,
@@ -17,7 +20,7 @@ import FormValidator from "../components/FormValidator.js";
 import Card from "../components/Card.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import PopupWithImage from "../components/PopupWithImage.js";
-import PopupWithSubmit from "../components/PopupWithSubmit.js"
+import PopupWithSubmit from "../components/PopupWithSubmit.js";
 import Section from "../components/Section.js";
 import UserInfo from "../components/UserInfo.js";
 import Api from "../components/Api.js";
@@ -30,26 +33,36 @@ const api = new Api({
   },
 });
 
+function renderForm (isLoading, modal) {
+  if (isLoading) {
+    modal.querySelector(".form__submit").textContent = 'Saving...';
+  }
+  else {
+    modal.querySelector('.form__submit').textContent = 'Save';
+  }
+}
 
 const currentUser = new UserInfo();
 api.getUserInfo()
 .then(res => {
   currentUser.setUserInfo(res.name,res.about,res.avatar);
-  const currentUserId = res._id;
-  console.log("my id is - " + currentUserId);
 });
 
 
 
 const profileEdit = new PopupWithForm({
-  popupSelector: ".modal_type_edit-profile",
+  popupSelector: '.modal_type_edit-profile',
   handleFormSubmit: (formInputs) => {
+    renderForm(true, editProfileModal);
     api.updateUserInfo({name: formInputs.profileName, about: formInputs.profileAbout})
     .then((res) => {
     currentUser.setUserInfo(res.name,res.about, res.avatar);
+    })
+    .finally(() => {
+      renderForm(false, editProfileModal);
+      profileEdit.close();
     });
-    profileEdit.close();
-  },
+  }
 });
 
 profileEdit.setEventListeners();
@@ -64,6 +77,7 @@ profileEditButton.addEventListener('click', () => {
 const profilePictureEdit = new PopupWithForm ({
   popupSelector: '.modal_type_edit-profile-picture',
   handleFormSubmit: (formInputs) => {
+    renderForm(true, editProfilePictureModal);
     api.updateUserPicture(formInputs.pictureLink)
     .then((res) => {
       currentUser.setProfilePicture(res.avatar);
@@ -71,6 +85,10 @@ const profilePictureEdit = new PopupWithForm ({
     })
     .catch((err) => {
       console.log(err);
+      profilePictureEdit.close();
+    })
+    .finally(() => {
+      renderForm(false, editProfilePictureModal);
       profilePictureEdit.close();
     });
   }
@@ -80,8 +98,6 @@ profilePictureEdit.setEventListeners();
 profilePictureEditButton.addEventListener('click', () => {
   profilePictureEdit.open();
 });
-
-
 
 api.getUserInfo()
 .then(res => {
@@ -110,7 +126,7 @@ api.getUserInfo()
                       card.removeCard();
                       deleteCardModal.close();
                     });
-                    console.log(cardData._id + " was deleted");
+                    // console.log(cardData._id + " was deleted");
                   }
                 });
                 deleteCardModal.setEventListeners();
@@ -122,7 +138,7 @@ api.getUserInfo()
                 // console.log(cardData.isLiked);
                 api.changeLikeStatus(cardData._id, cardData.isLiked)
                 .then(likesData => {
-                  console.log(likesData)
+                  // console.log(likesData)
                   card.setLikesNumber(likesData.likes.length, cardData.isLiked);
                   card.like();
                 }
@@ -143,6 +159,7 @@ api.getUserInfo()
     const addNewCard = new PopupWithForm({
       popupSelector: ".modal_type_add-place",
       handleFormSubmit: (formInputs) => {
+        renderForm(true, newPlaceModal);
         api.addNewCard({ name: formInputs.placeTitle, link: formInputs.placeLink })
         .then((res) => {
           const card = new Card(
@@ -153,7 +170,6 @@ api.getUserInfo()
                 photoModal.open(name, link);
               },
               handleDeleteClick: (cardData) => {
-                // console.log("clicked bin of this card - " + cardId);
                 const deleteCardModal = new PopupWithSubmit({
                   popupSelector: ".modal_type_delete-place",
                   handleDeleteSubmit: () => {
@@ -161,17 +177,29 @@ api.getUserInfo()
                       card.removeCard();
                       deleteCardModal.close();
                     });
-                    console.log(cardData._id + " was deleted");
+                    // console.log(cardData._id + " was deleted");
                   }
                 });
                 deleteCardModal.setEventListeners();
                 deleteCardModal.open();
               },
+              handleLikeClick: (cardData) => {
+                api.changeLikeStatus(cardData._id, cardData.isLiked)
+                .then(likesData => {
+                  card.setLikesNumber(likesData.likes.length, cardData.isLiked);
+                  card.like();
+                }
+                  );
+
+              }
             },
             ".element-template"
           );
-          const cardElement = card.getCard(res.owner._id, currentUserId);
+          const cardElement = card.getCard(res.owner._id, currentUserId, res.likes);
           initialElements.addItem(cardElement);
+        })
+        .finally(()=> {
+          renderForm(false, newPlaceModal);
           addNewCard.close();
         });
       }
@@ -185,43 +213,8 @@ api.getUserInfo()
 });
 
 
-
-
-
-
-
-  //   const card = new Card(
-  //     {
-  //       data: { name: formInputs.placeTitle, link: formInputs.placeLink },
-  //       handleCardClick: (name, link) => {
-  //         photoModal.open(name, link);
-  //       },
-  //     },
-  //     ".element-template"
-  //   );
-  //   const cardElement = card.getCard();
-  //   initialElements.addItem(cardElement);
-  //   // createCard({name: formInputs.placeTitle, link: formInputs.placeLink});
-  //   addNewCard.close();
-
-
-
-
-
 const photoModal = new PopupWithImage(".modal_type_image");
 photoModal.setEventListeners();
-
-
-// function createCard (cardData) {
-//   const card = new Card ({
-//       data: cardData,
-//       handleCardClick: (name, link) => {
-//         photoModal.open(name, link);
-//       }
-//     }, '.element-template');
-//     const cardElement = card.getCard();
-//     initialElements.addItem(cardElement);
-// }
 
 const editProfileModalValidator = new FormValidator(
   settings,

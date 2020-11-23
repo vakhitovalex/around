@@ -37,9 +37,9 @@ export const initialCards = [
 
 export const cardListSelector = '.elements';
 
-const editProfileModal = document.querySelector('.modal_type_edit-profile');
-const newPlaceModal = document.querySelector('.modal_type_add-place');
-const editProfilePictureModal = document.querySelector('.modal_type_edit-profile-picture');
+export const editProfileModal = document.querySelector('.modal_type_edit-profile');
+export const newPlaceModal = document.querySelector('.modal_type_add-place');
+export const editProfilePictureModal = document.querySelector('.modal_type_edit-profile-picture');
 
 export const profileSubmitForm = editProfileModal.querySelector('.form');
 export const profilePictureSubmitForm = editProfilePictureModal.querySelector('.form');

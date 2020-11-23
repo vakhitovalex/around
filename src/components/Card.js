@@ -31,10 +31,6 @@ class Card {
     this.isLiked = !this.isLiked;
   }
 
-
-
-
-
   removeCard () {
     this._elementContent.remove();
     this._elementContent = '';
@@ -44,9 +40,9 @@ class Card {
   //   if (this._cardId == currentUser)
   // }
 
-  id () {
-    return this._id();
-  }
+  // id () {
+  //   return this._id();
+  // }
 
   _setEventListeners () {
     this._elementContents.elementLike.addEventListener('click', () => this._handleLikeClick(this));
@@ -66,6 +62,12 @@ class Card {
       const elementLike = this._elementContent.querySelector('.element__like-figure');
       const elementLikeCount = this._elementContent.querySelector('.element__like-count');
       elementLikeCount.innerHTML = likes.length;
+      //   if (!likes.length) {
+      //   elementLikeCount.innerHTML = '0';
+      // }
+      // else {
+      //
+      // }
       const elementTitle = this._elementContent.querySelector('.element__name');
       const elementDelete = this._elementContent.querySelector('.element__delete');
       if (this._currentUserId != this._ownerId) {
