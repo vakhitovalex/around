@@ -10,8 +10,7 @@ class Api {
     })
       .then((res) =>
         res.ok ? res.json() : Promise.reject(`Error: ${res.status}`)
-      )
-      .catch((err) => console.log(err));
+      );
   }
   // GET https://around.nomoreparties.co/v1/groupId/users/me
   getUserInfo() {
@@ -21,8 +20,7 @@ class Api {
       .then((res) =>
         res.ok ? res.json() : Promise.reject(`Error: ${res.status}`)
 
-      )
-      .catch((err) => console.log(err));
+      );
   }
 
   //PUT https://around.nomoreparties.co/v1/groupId/cards/likes/cardId
@@ -35,8 +33,8 @@ class Api {
       })
         .then((res) =>
           res.ok ? res.json() : Promise.reject(`Error: ${res.status}`)
-        )
-        .catch((err) => console.log(err));
+        );
+
     }
     else {
         return fetch(this._baseUrl + '/cards/likes/' + cardId,  {
@@ -45,8 +43,8 @@ class Api {
         })
           .then((res) =>
             res.ok ? res.json() : Promise.reject(`Error: ${res.status}`)
-          )
-          .catch((err) => console.log(err));
+          );
+
       }
     }
 
@@ -62,8 +60,7 @@ class Api {
     })
       .then((res) =>
         res.ok ? res.json() : Promise.reject(`Error: ${res.status}`)
-      )
-      .catch((err) => console.log(err));
+      );
   }
 
   //PATCH https://around.nomoreparties.co/v1/groupId/users/me/avatar
@@ -77,8 +74,7 @@ class Api {
     })
       .then((res) =>
         res.ok ? res.json() : Promise.reject(`Error: ${res.status}`)
-      )
-      .catch((err) => console.log(err));
+      );
   }
 
 
@@ -94,8 +90,7 @@ class Api {
     })
       .then((res) =>
         res.ok ? res.json() : Promise.reject(`Error: ${res.status}`)
-      )
-      .catch((err) => console.log(err));
+      );
   }
   //DELETE DELETE https://around.nomoreparties.co/v1/groupId/cards/cardId
   deleteCard(cardId) {
@@ -105,13 +100,9 @@ class Api {
     })
       .then((res) =>
         res.ok ? res.json() : Promise.reject(`Error: ${res.status}`)
-      )
-      .catch((err) => console.log(err));
+      );
   }
 }
-
-
-
 
 export default Api;
 
