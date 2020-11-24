@@ -52,29 +52,16 @@ class Card {
 
 
   getCard (ownerId, currentUserId, likes) {
-
-    //console.log(ownerId + ' are they eq with ' + this._currentUserId );
-
       this._elementContent = this._getTemplate();
-
-
       const elementImage = this._elementContent.querySelector('.element__image');
       const elementLike = this._elementContent.querySelector('.element__like-figure');
       const elementLikeCount = this._elementContent.querySelector('.element__like-count');
       elementLikeCount.innerHTML = likes.length;
-      //   if (!likes.length) {
-      //   elementLikeCount.innerHTML = '0';
-      // }
-      // else {
-      //
-      // }
       const elementTitle = this._elementContent.querySelector('.element__name');
       const elementDelete = this._elementContent.querySelector('.element__delete');
-      if (this._currentUserId != this._ownerId) {
+      if (this._currentUserId !== this._ownerId) {
         elementDelete.remove();
       }
-
-
       elementTitle.textContent = this._name;
       elementImage.style.backgroundImage = `url(${this._link})`;
 
