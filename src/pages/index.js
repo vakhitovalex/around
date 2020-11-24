@@ -42,9 +42,9 @@ function renderForm(isLoading, modal) {
 }
 
 const currentUser = new UserInfo();
-api.getUserInfo().then((res) => {
-  currentUser.setUserInfo(res.name, res.about, res.avatar);
-});
+// api.getUserInfo().then((res) => {
+//   currentUser.setUserInfo(res.name, res.about, res.avatar);
+// });
 
 const profileEdit = new PopupWithForm({
   popupSelector: ".modal_type_edit-profile",
@@ -58,9 +58,12 @@ const profileEdit = new PopupWithForm({
       .then((res) => {
         currentUser.setUserInfo(res.name, res.about, res.avatar);
       })
-      .finally(() => {
+      .then(() => {
         renderForm(false, editProfileModal);
         profileEdit.close();
+      })
+      .catch((err) => {
+        console.log(err);
       });
   },
 });
@@ -84,13 +87,12 @@ const profilePictureEdit = new PopupWithForm({
         currentUser.setProfilePicture(res.avatar);
         profilePictureEdit.close();
       })
-      .catch((err) => {
-        console.log(err);
-        profilePictureEdit.close();
-      })
-      .finally(() => {
+      .then(() => {
         renderForm(false, editProfilePictureModal);
         profilePictureEdit.close();
+      })
+      .catch((err) => {
+        console.log(err);
       });
   },
 });
@@ -101,6 +103,7 @@ profilePictureEditButton.addEventListener("click", () => {
 });
 
 api.getUserInfo().then((res) => {
+  currentUser.setUserInfo(res.name, res.about, res.avatar);
   const currentUserId = res._id;
   api.getInitialCards().then((res) => {
     console.log(res);
@@ -211,9 +214,12 @@ api.getUserInfo().then((res) => {
             );
             initialElements.addItem(cardElement);
           })
-          .finally(() => {
+          .then(() => {
             renderForm(false, newPlaceModal);
             addNewCard.close();
+          })
+          .catch((err) => {
+            console.log(err);
           });
       },
     });
