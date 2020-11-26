@@ -1,8 +1,8 @@
-# Project 5: Around The U.S.
+# Around the U.S.
 
-[Link to my project -> https://vakhitovalex.github.io/web_project_4/](https://vakhitovalex.github.io/web_project_4/)
+[Link to my project -> Around the U.S.](https://vakhitovalex.github.io/around/)
 
-### Pure vanilla JS
-### Things to improve
-* Functions improve
+### Vanilla JS
+
+
 
